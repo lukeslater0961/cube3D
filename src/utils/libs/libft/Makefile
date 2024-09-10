@@ -45,8 +45,8 @@ SRCS = ft_bzero.c \
 		ft_itoa.c \
 		ft_free_tab.c \
 		ft_lst_get_last.c \
-		GNL/get_next_line.c \
-		GNL/get_next_line_utils.c \
+		get_next_line/get_next_line.c \
+		get_next_line/get_next_line_utils.c \
 		ft_Printf/ft_printf.c \
 		ft_Printf/ft_putchar.c \
 		ft_Printf/ft_putnbr.c \
