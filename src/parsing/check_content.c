@@ -6,11 +6,22 @@
 /*   By: bastienverdier-vaissiere <bastienverdier-  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:55:43 by bastienverdie     #+#    #+#             */
-/*   Updated: 2024/09/10 17:53:03 by bastienverdie    ###   ########.fr       */
+/*   Updated: 2024/09/10 20:34:22 by bastienverdie    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube.h"
+
+int test(char *str, char sep)
+{
+	while (*str)
+	{
+		if (*str != sep)
+			return (1);
+		str++;
+	}
+	return (0);
+}
 
 static int	parse_textures(t_data *data)
 {
@@ -19,24 +30,20 @@ static int	parse_textures(t_data *data)
 
 	i = 0;
 	line = NULL;
-	while (i <= 6) {
+	while (!data->textures[5]) 
+	{
 		line = get_next_line(data->fd);
-		ft_printf(1, "%s\n", line);
-		if (!line && i != 4)
-		{
-			free(line);
+		if (!line)
 			return (1);
-		}
-		if (line)
-			data->textures[i] = ft_strdup(line);
+		if (ft_strlen(line) && line[ft_strlen(line) - 1] == '\n')
+            line[ft_strlen(line) - 1] = '\0';
+		if (ft_strlen(line) <= 0)
+			continue;
+		data->textures[i] = ft_strdup(line);
 		free(line);
 		i++;
 	}
-	ft_printf(1, "%s\n", data->textures[0]);
-	ft_printf(1, "%s\n", data->textures[1]);
-	ft_printf(1, "%s\n", data->textures[2]);
-	ft_printf(1, "%s\n", data->textures[3]);
-	ft_printf(1, "%s\n", data->textures[4]);
+	print_tab(data->textures);
 	return (0);
 }
 

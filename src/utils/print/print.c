@@ -6,7 +6,7 @@
 /*   By: bastienverdier-vaissiere <bastienverdier-  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 17:29:32 by bastienverdie     #+#    #+#             */
-/*   Updated: 2024/09/10 17:39:48 by bastienverdie    ###   ########.fr       */
+/*   Updated: 2024/09/10 18:48:46 by bastienverdie    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void print_texture(t_data *data)
 	i = 0;
 	while (data->textures[i])
 	{
-		ft_printf(2, "%s\n", data->textures[i]);
+		ft_printf(1, "%s\n", data->textures[i]);
 		i++;
 	}
 }
@@ -33,7 +33,6 @@ void print_tab(char **tab)
 	while (tab[i])
 	{
 		ft_printf(2, "%s\n", tab[i]);
-		ft_printf(1, "%d\n", i);
 		i++;
 	}
 }
