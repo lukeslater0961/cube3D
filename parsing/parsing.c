@@ -6,7 +6,7 @@
 /*   By: lslater <lslater@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 09:06:55 by lslater           #+#    #+#             */
-/*   Updated: 2024/09/10 09:24:11 by lslater          ###   ########.fr       */
+/*   Updated: 2024/09/10 09:38:54 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ static int	check_extension(char *filename)
 {
 	char	*extension;
 
-	extension = ft_strchr(filename, '.cub');
-	if(!extension)
+	extension = ft_strnstr(filename, ".cub", ft_strlen(filename));
+	ft_printf(1, "%s extension\n", extension);
+	extension[ft_strlen(extension) + 1] = '\0';
+	if(!extension || ft_strncmp(extension, ".cub", 4) != 0)
 	{
 		ft_printf(2, "filename or extension is invalid\n");
 		return (1);
