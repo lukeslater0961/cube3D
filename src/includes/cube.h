@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bastienverdier-vaissiere <bastienverdier-  +#+  +:+       +#+        */
+/*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/10 16:23:12 by bastienverdie     #+#    #+#             */
-/*   Updated: 2024/09/10 17:33:45 by bastienverdie    ###   ########.fr       */
+/*   Created: 2024/09/10 16:23:12 by bastienverd       #+#    #+#             */
+/*   Updated: 2024/09/11 15:39:18 by bananabread      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE_H
-#define	CUBE_H
+# define CUBE_H
 
 # include "parsing.h"
 # include "data.h"

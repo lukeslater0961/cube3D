@@ -3,44 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: basverdi <basverdi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 23:18:20 by bastienverd       #+#    #+#             */
-/*   Updated: 2023/12/13 15:03:20 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/09/11 14:39:42 by bananabread      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-unsigned int	ft_strlen(const char *str)
-{
-	unsigned int	i;
+// unsigned int	ft_strlen(const char *str)
+// {
+// 	unsigned int	i;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	while (str[i])
+// 		i++;
+// 	return (i);
+// }
 
-char	*ft_strdup(const char *s)
-{
-	char	*str;
-	size_t	i;
+// char	*ft_strdup(const char *s)
+// {
+// 	char	*str;
+// 	size_t	i;
 
-	i = 0;
-	str = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (!str)
-		return (0);
-	if (ft_strlen(s) == 1)
-		str[i] = 0;
-	while (s[i] && i < ft_strlen(s) - 1)
-	{
-		str[i] = s[i];
-		i++;
-	}
-	str[i] = '\0' ;
-	return (str);
-}
+// 	i = 0;
+// 	str = malloc(sizeof(char) * (ft_strlen(s) + 1));
+// 	if (!str)
+// 		return (0);
+// 	if (ft_strlen(s) == 1)
+// 		str[i] = 0;
+// 	while (s[i] && i < ft_strlen(s) - 1)
+// 	{
+// 		str[i] = s[i];
+// 		i++;
+// 	}
+// 	str[i] = '\0' ;
+// 	return (str);
+// }
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {
@@ -69,30 +69,30 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	return (dest);
 }
 
-char	*ft_substr(const char *s, unsigned int start, unsigned int len)
-{
-	unsigned int	i;
-	char			*dest;
+// char	*ft_substr(const char *s, unsigned int start, unsigned int len)
+// {
+// 	unsigned int	i;
+// 	char			*dest;
 
-	i = 0;
-	if (!s)
-		return (NULL);
-	if (start >= ft_strlen(s))
-		dest = malloc(1 * sizeof(char));
-	else if (ft_strlen(s) - start > len)
-		dest = malloc(len + 1 * sizeof(char));
-	else
-		dest = malloc((ft_strlen(s) - start + 1) * sizeof(char));
-	if (!dest)
-		return (NULL);
-	if (start < ft_strlen(s))
-	{
-		while (s[start + i] && i < len)
-		{
-			dest[i] = s[i + start];
-			i++;
-		}
-	}
-	dest[i] = '\0';
-	return (dest);
-}
+// 	i = 0;
+// 	if (!s)
+// 		return (NULL);
+// 	if (start >= ft_strlen(s))
+// 		dest = malloc(1 * sizeof(char));
+// 	else if (ft_strlen(s) - start > len)
+// 		dest = malloc(len + 1 * sizeof(char));
+// 	else
+// 		dest = malloc((ft_strlen(s) - start + 1) * sizeof(char));
+// 	if (!dest)
+// 		return (NULL);
+// 	if (start < ft_strlen(s))
+// 	{
+// 		while (s[start + i] && i < len)
+// 		{
+// 			dest[i] = s[i + start];
+// 			i++;
+// 		}
+// 	}
+// 	dest[i] = '\0';
+// 	return (dest);
+// }
