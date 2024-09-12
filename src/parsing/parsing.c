@@ -6,11 +6,23 @@
 /*   By: bastienverdier-vaissiere <bastienverdier-  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:40:58 by bastienverdie     #+#    #+#             */
-/*   Updated: 2024/09/12 11:40:12 by lslater          ###   ########.fr       */
+/*   Updated: 2024/09/12 13:31:07 by bastienverdie    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube.h"
+
+void	ft_duptab(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->map[i])
+	{
+		data->flood_fill[i] = ft_strdup(data->map[i]);
+		i++;
+	}
+}
 
 int	add_line_to_map(t_data *data, char *line, int *i, int *capacity)
 {
@@ -55,8 +67,33 @@ int init_map(t_data *data)
         line = get_next_line(data->fd);
     }
     data->map[i] = NULL;
-	print_tab(data->map);
     return (0);
+}
+
+int is_map_closed(t_data *data, int rows, int cols)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	print_tab(data->flood_fill);
+	while (i < rows)
+	{
+		j = 0;
+		while (j < cols)
+		{
+			if (data->flood_fill[i][j] == '7')
+			{
+				if (i == 0 || j == 0 || i == rows - 1 || j == cols - 1 ||
+					data->flood_fill[i + 1][j] != '1' || data->flood_fill[i - 1][j] != '1' ||
+					data->flood_fill[i][j + 1] != '1' || data->flood_fill[i][j - 1] != '1')
+					return (0);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (1);
 }
 
 int	check_map_is_closed(t_data *data, int rows, size_t cols)
@@ -67,24 +104,28 @@ int	check_map_is_closed(t_data *data, int rows, size_t cols)
 	cols = 0;
 	rows = 0;
 	i = 0;
-	j = 0;
 	while (data->map[rows])
 	{
 		if (ft_strlen(data->map[rows]) > cols)
 			cols = ft_strlen(data->map[rows]);
 		rows++;
 	}
+	data->flood_fill = ft_calloc(sizeof(char *), rows - 1);
+	ft_duptab(data);	
 	while (i < rows)
 	{
+		j = 0;
 		while (j < cols && data->map[i][j])
 		{
 			if (data->map[i][j] == 'N' || data->map[i][j] == 'S' || data->map[i][j] == 'E' || data->map[i][j] == 'W')
 			{
 				data->player_orientation = data->map[i][j];
 				map_flood(data, i, j, rows, cols);
-				return (check_map_is_closed(data, 0, 0));
+				return (is_map_closed(data, 0, 0));
 			}
+			j++;
 		}
+		i++;
 	}
 	ft_printf(1, "Error\nPlayer not found");
 	return (1);
@@ -96,6 +137,7 @@ int	check_map(t_data *data)
 		return (1);
 	if (check_map_is_closed(data, 0, 0))
 		return (1);
+	print_tab(data->flood_fill);
 	return (1);
 }
 
