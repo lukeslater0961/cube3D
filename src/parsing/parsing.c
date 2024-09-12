@@ -6,7 +6,7 @@
 /*   By: bastienverdier-vaissiere <bastienverdier-  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:40:58 by bastienverdie     #+#    #+#             */
-/*   Updated: 2024/09/11 17:55:01 by bastienverdie    ###   ########.fr       */
+/*   Updated: 2024/09/12 11:40:12 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,10 @@ int init_map(t_data *data)
     return (0);
 }
 
-int	check_map_is_closed(t_data *data)
+int	check_map_is_closed(t_data *data, int rows, size_t cols)
 {
-	int	rows;
-	int	cols;
 	int	i;
-	int	j;
+	size_t	j;
 
 	cols = 0;
 	rows = 0;
@@ -83,8 +81,8 @@ int	check_map_is_closed(t_data *data)
 			if (data->map[i][j] == 'N' || data->map[i][j] == 'S' || data->map[i][j] == 'E' || data->map[i][j] == 'W')
 			{
 				data->player_orientation = data->map[i][j];
-				flood_fill_from_player(data, i, j, rows, cols);
-				return (is_map_closed(data, rows, cols));
+				map_flood(data, i, j, rows, cols);
+				return (check_map_is_closed(data, 0, 0));
 			}
 		}
 	}
@@ -96,7 +94,7 @@ int	check_map(t_data *data)
 {
 	if (init_map(data))
 		return (1);
-	if (check_map_is_closed(data))
+	if (check_map_is_closed(data, 0, 0))
 		return (1);
 	return (1);
 }

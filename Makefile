@@ -14,6 +14,7 @@ SRCS_FILES = main.c \
 			 parsing/parsing.c \
 			 parsing/check_format.c \
 			 parsing/check_content.c \
+			 parsing/flood_fill.c\
 			 utils/print/print.c
 
 SRCS = 	$(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
