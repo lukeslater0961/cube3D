@@ -1,40 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   ft_putlpoint.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yroussea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/10 08:01:14 by yroussea          #+#    #+#             */
+/*   Created: 2023/11/05 12:49:33 by yroussea          #+#    #+#             */
 /*   Updated: 2024/07/09 09:14:38 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_find_bn(const char *s)
+size_t	ft_putlpoint_fd(void *p, int fd)
 {
-	long long	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == '\n')
-			return (i);
-		i += 1;
-	}
-	return (-1);
+	if (p == 0)
+		return (ft_putlstr_fd("(nil)", fd));
+	return (ft_putlstr_fd("0x", fd) + \
+			ft_putlhexa_low_fd((unsigned long long)p, fd));
 }
 
-size_t	ft_strcpy_until_bn(const char *s, char *result)
+size_t	ft_putlpoint(void *p)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i] && s[i] != '\n')
-	{
-		(result)[i] = s[i];
-		i += 1;
-	}
-	return (i);
+	return (ft_putlpoint_fd(p, 1));
 }

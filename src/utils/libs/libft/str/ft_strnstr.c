@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yroussea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/10 08:01:14 by yroussea          #+#    #+#             */
+/*   Created: 2023/10/31 09:05:39 by yroussea          #+#    #+#             */
 /*   Updated: 2024/07/09 09:14:38 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_find_bn(const char *s)
-{
-	long long	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == '\n')
-			return (i);
-		i += 1;
-	}
-	return (-1);
-}
-
-size_t	ft_strcpy_until_bn(const char *s, char *result)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	i;
+	size_t	k;
 
 	i = 0;
-	while (s[i] && s[i] != '\n')
+	if (len == 0 && !big)
+		return (NULL);
+	if (!little || *little == '\0' || little == big)
+		return ((char *)big);
+	while (big[i] && i < len)
 	{
-		(result)[i] = s[i];
+		k = 0;
+		while (little[k] == big[i + k] && (i + k) < len && little[k] && big[k])
+			k += 1;
+		if (!little[k] && k != 0)
+			return ((char *)(big + i));
 		i += 1;
 	}
-	return (i);
+	return (NULL);
 }

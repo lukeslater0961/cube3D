@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yroussea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/10 08:01:14 by yroussea          #+#    #+#             */
+/*   Created: 2023/10/31 09:40:56 by yroussea          #+#    #+#             */
 /*   Updated: 2024/07/09 09:14:38 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_find_bn(const char *s)
+int	ft_atoi(const char *nptr)
 {
-	long long	i;
+	int	sign;
+	int	i;
+	int	result;
 
 	i = 0;
-	while (s[i])
+	while (nptr && ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == ' '))
 	{
-		if (s[i] == '\n')
-			return (i);
 		i += 1;
 	}
-	return (-1);
-}
-
-size_t	ft_strcpy_until_bn(const char *s, char *result)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] && s[i] != '\n')
+	if (nptr && (nptr[i] == '+' || nptr[i] == '-'))
 	{
-		(result)[i] = s[i];
+		sign = 1 - (2 * (nptr[i] == '-'));
 		i += 1;
 	}
-	return (i);
+	else
+		sign = 1;
+	result = 0;
+	while (nptr && (nptr[i] <= '9' && nptr[i] >= '0'))
+	{
+		result = result * 10 + (nptr[i] - '0');
+		i += 1;
+	}
+	return (sign * result);
 }

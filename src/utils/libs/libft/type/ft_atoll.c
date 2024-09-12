@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   ft_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yroussea <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: basverdi <basverdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/10 08:01:14 by yroussea          #+#    #+#             */
+/*   Created: 2024/02/06 15:52:23 by bastienverd       #+#    #+#             */
 /*   Updated: 2024/07/09 09:14:38 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_find_bn(const char *s)
+long long	ft_atoll(char *s)
 {
-	long long	i;
+	long long	result;
+	int			neg;
 
-	i = 0;
-	while (s[i])
+	result = 0;
+	neg = 1;
+	while (s && *s && *s == ' ')
+		s += 1;
+	if (*s == '-' || *s == '+')
 	{
-		if (s[i] == '\n')
-			return (i);
-		i += 1;
+		neg = (*s == '-') * -1 + (*s == '+') * 1;
+		s += 1;
 	}
-	return (-1);
-}
-
-size_t	ft_strcpy_until_bn(const char *s, char *result)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] && s[i] != '\n')
+	while (s && *s)
 	{
-		(result)[i] = s[i];
-		i += 1;
+		result = result * 10 + (*s - '0');
+		s += 1;
 	}
-	return (i);
+	return (result * neg);
 }

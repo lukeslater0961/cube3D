@@ -6,7 +6,7 @@
 /*   By: bastienverdier-vaissiere <bastienverdier-  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:48:17 by bastienverdie     #+#    #+#             */
-/*   Updated: 2024/09/10 17:22:04 by bastienverdie    ###   ########.fr       */
+/*   Updated: 2024/09/12 15:03:38 by bastienverdie    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int  check_extension(char *filename)
 		extension[ft_strlen(extension) + 1] = '\0';
 	if(!extension || strcmp(extension, ".cub") != 0)
     {
-		ft_printf(2, "Error\n Filename or extension is invalid\n");
+		ft_printf_fd(2, "Error\n Filename or extension is invalid\n");
 		return (1);
 	}
 	return (0);
@@ -34,12 +34,12 @@ static  int  check_directory(char *filename, t_data *data)
     fd = open(filename, O_RDWR);
     if (errno == EISDIR)
     {
-        ft_printf(2, "Error\n Argument is directory and not a file \n");
+        ft_printf_fd(2, "Error\n Argument is directory and not a file \n");
         return (1);
     }
     else if (fd == -1)
     {
-        ft_printf(2, "Error\n File doesn't exist\n");
+        ft_printf_fd(2, "Error\n File doesn't exist\n");
         return (1);
     }
     data->fd = fd;

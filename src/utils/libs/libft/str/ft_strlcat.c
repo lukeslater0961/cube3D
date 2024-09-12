@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yroussea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/10 08:01:14 by yroussea          #+#    #+#             */
+/*   Created: 2023/10/31 07:28:11 by yroussea          #+#    #+#             */
 /*   Updated: 2024/07/09 09:14:38 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_find_bn(const char *s)
-{
-	long long	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == '\n')
-			return (i);
-		i += 1;
-	}
-	return (-1);
-}
-
-size_t	ft_strcpy_until_bn(const char *s, char *result)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
 	size_t	i;
+	size_t	len_dst;
+	size_t	len_src;
 
+	len_src = ft_strlen(src);
 	i = 0;
-	while (s[i] && s[i] != '\n')
+	if (size == 0)
+		return (len_src);
+	len_dst = ft_strlen(dst);
+	if (size <= len_dst)
+		return (size + len_src);
+	while (src && src[i] && len_dst + i < size - 1)
 	{
-		(result)[i] = s[i];
+		dst[i + len_dst] = src[i];
 		i += 1;
 	}
-	return (i);
+	dst[i + len_dst] = '\0';
+	return (len_dst + len_src);
 }

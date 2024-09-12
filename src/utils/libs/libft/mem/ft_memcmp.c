@@ -1,40 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yroussea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/10 08:01:14 by yroussea          #+#    #+#             */
+/*   Created: 2023/10/31 08:49:52 by yroussea          #+#    #+#             */
 /*   Updated: 2024/07/09 09:14:38 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_find_bn(const char *s)
-{
-	long long	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == '\n')
-			return (i);
-		i += 1;
-	}
-	return (-1);
-}
-
-size_t	ft_strcpy_until_bn(const char *s, char *result)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	size_t	i;
+	int		cmp;
 
+	cmp = 0;
 	i = 0;
-	while (s[i] && s[i] != '\n')
+	if (!s1 && !s2)
+		return (0);
+	while (i < n)
 	{
-		(result)[i] = s[i];
+		cmp = *(unsigned char *)(s1 + i) - *(unsigned char *)(s2 + i);
+		if (cmp != 0)
+			return (cmp);
 		i += 1;
 	}
-	return (i);
+	return (0);
 }

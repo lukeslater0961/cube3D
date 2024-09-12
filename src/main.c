@@ -6,7 +6,7 @@
 /*   By: bastienverdier-vaissiere <bastienverdier-  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:23:51 by bastienverdie     #+#    #+#             */
-/*   Updated: 2024/09/12 13:55:16 by bastienverdie    ###   ########.fr       */
+/*   Updated: 2024/09/12 15:04:12 by bastienverdie    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ int	main(int argc, char **argv)
 		}
 	}
 	else
-		ft_printf(2, "not enough or too many arguments");
+		ft_printf_fd(2, "not enough or too many arguments");
 	return (0);
 }

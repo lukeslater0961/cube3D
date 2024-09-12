@@ -1,124 +1,146 @@
-PROG_NAME = libft.a
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: basverdi <basverdi@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/10/30 13:06:11 by yroussea          #+#    #+#              #
+#    Updated: 2024/07/10 17:54:22 by yroussea         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -fPIC
+PROJECT = ft_libft
+NAME = libft.a
+PROJET_EMOJY = 📚
+CC = $(SILENT)cc $(CFLAGS)
+CFLAGS = -Wall -Wextra -Werror
 
-SRCS = ft_bzero.c \
-		ft_isalnum.c \
-		ft_isalpha.c \
-		ft_isascii.c \
-		ft_isdigit.c \
-		ft_isprint.c \
-		ft_isws.c \
-		ft_memcpy.c \
-		ft_memmove.c \
-		ft_memset.c \
-		ft_strchr.c \
-		ft_strlcat.c \
-		ft_strlcpy.c \
-		ft_strlen.c \
-		ft_tablen.c \
-		ft_strcmp.c \
-		ft_strncmp.c \
-		ft_strncpy.c \
-		ft_strjoin_free.c \
-		ft_strrchr.c \
-		ft_tolower.c \
-		ft_toupper.c \
-		ft_memcmp.c \
-		ft_memchr.c \
-		ft_strnstr.c \
-		ft_atoi.c \
-		ft_calloc.c \
-		ft_realloc.c \
-		ft_strdup.c \
-		ft_putnbr_fd.c \
-		ft_putchar_fd.c \
-		ft_putstr_fd.c \
-		ft_putendl_fd.c \
-		ft_substr.c \
-		ft_strmapi.c \
-		ft_striteri.c \
-		ft_strjoin.c \
-		ft_strtrim.c \
-		ft_split.c \
-		ft_itoa.c \
-		ft_free_tab.c \
-		ft_lst_get_last.c \
-		get_next_line/get_next_line.c \
-		get_next_line/get_next_line_utils.c \
-		ft_Printf/ft_printf.c \
-		ft_Printf/ft_putchar.c \
-		ft_Printf/ft_putnbr.c \
-		ft_Printf/ft_putnbrhex.c \
-		ft_Printf/ft_putstr.c
+OBJS_DIR = obj
 
-SRC_BONUS = ft_lstnew_bonus.c \
-		ft_lstadd_front_bonus.c \
-		ft_lstsize_bonus.c \
-		ft_lstlast_bonus.c \
-		ft_lstadd_back_bonus.c \
-		ft_lstdelone_bonus.c \
-		ft_lstclear_bonus.c \
-		ft_lstiter_bonus.c \
-		ft_lstmap_bonus.c
+SRCS_FILES = char/ft_isalnum.c			\
+	char/ft_isalpha.c			\
+	char/ft_isascii.c			\
+	char/ft_isdigit.c			\
+	char/ft_isprint.c			\
+	char/ft_tolower.c			\
+	char/ft_toupper.c			\
+	list/ft_lstadd_back.c		\
+	list/ft_lstadd_front.c		\
+	list/ft_lstclear.c			\
+	list/ft_lstdelone.c			\
+	list/ft_lstiter.c			\
+	list/ft_lstlast.c			\
+	list/ft_lstmap.c			\
+	list/ft_lstnew.c			\
+	list/ft_lstsize.c			\
+	stack/ft_stacklast.c		\
+	stack/ft_stacknew.c			\
+	stack/ft_stacksize.c		\
+	stack/ft_stackadd_front.c	\
+	stack/ft_stackadd_back.c	\
+	mem/ft_bzero.c				\
+	mem/ft_calloc.c				\
+	mem/ft_memchr.c				\
+	mem/ft_memcmp.c				\
+	mem/ft_memcpy.c				\
+	mem/ft_memmove.c			\
+	mem/ft_memset.c				\
+	mem/magic_free.c			\
+	print/ft_printf.c			\
+	print/ft_printf_fd.c		\
+	print/ft_putchar_fd.c		\
+	print/ft_putendl_fd.c		\
+	print/ft_putlchar.c			\
+	print/ft_putlhexa.c			\
+	print/ft_putlnbr.c			\
+	print/ft_putlpoint.c		\
+	print/ft_putmultstr.c		\
+	print/ft_putlstr.c			\
+	print/ft_putnbr_fd.c		\
+	print/ft_putstr_fd.c		\
+	print/ft_putstack.c			\
+	str/ft_split.c				\
+	str/ft_split_out_quote.c	\
+	str/ft_split_charset.c		\
+	str/ft_split_first_sep.c	\
+	str/ft_strchr.c				\
+	str/ft_strdup.c				\
+	str/ft_striteri.c			\
+	str/ft_strjoin.c			\
+	str/ft_strlcat.c			\
+	str/ft_strlcpy.c			\
+	str/ft_strlen.c				\
+	str/ft_strmapi.c			\
+	str/ft_strncmp.c			\
+	str/ft_strnstr.c			\
+	str/ft_strrchr.c			\
+	str/ft_strtrim.c			\
+	str/ft_substr.c				\
+	str/ft_vjoin.c				\
+	type/ft_atoi.c				\
+	type/ft_atoll.c				\
+	type/ft_itoa.c				\
+	type/ft_overflow.c			\
+	gnl/get_next_line.c			\
+	gnl/get_next_line_utils.c	\
+	maths/vmin_vmax.c 			\
+	maths/ft_abs.c
 
+SRCS = 	$(addprefix ./, $(SRCS_FILES))
+OBJS = $(subst ./,$(OBJS_DIR)/, $(subst .c,.o, $(SRCS)))
 
+DELET_LINE = $(SILENT) echo -n "\033[2K";
+RM = $(SILENT) rm -rf
 
-OBJS = $(SRCS:.c=.o)
-
-OBJS_BONUS = $(SRC_BONUS:.c=.o)
-
-#_____Define colors_____
-GREEN = \033[0;32m
-NC = \033[0m
-YELLOW = \033[1;33m
-RED = \033[0;31m
-PURPLE = \033[0;35m
-CYAN = \033[0;36m
-#______________________
+SILENT = @
+COLOUR_GREEN=\033[0;32m
+COLOUR_RED=\033[0;31m
+COLOUR_PURPULE = \033[38;5;197m
+COLOUR_BLUE=\033[0;34m
+COLOUR_YELLOW=\033[0;33m
+NO_COLOR=\033[m
 
 bold := $(shell tput bold)
 notbold := $(shell tput sgr0)
 
-#_____MESSAGES_____
-define SUCCESS_MESSAGE
-	@printf "\r${GREEN}$(bold)[$@ built successfully!]${NC}\n"
-endef
+PRINT = $(SILENT) printf "\r%b"
 
-define CLEANING_SUCCESS
-	@printf "\r${RED}$(bold)[🧹]${NC}$(bold)libft cleaned successfully!\n"
-endef
-#__________________
+MSG_CLEANING = "$(COLOUR_RED)$(bold)🧹cleaning $(notbold)$(COLOUR_YELLOW)$(PROJECT)$(NO_COLOR)";
+MSG_CLEANED = "$(COLOUR_RED)$(bold)[🗑️ ]$(PROJECT) $(notbold)$(COLOUR_YELLOW)cleaned $(NO_COLOR)\n";
+MSG_TOTALY_CLEANED = "$(COLOUR_RED)$(bold)[🗑️ ]$(PROJECT) $(notbold)$(COLOUR_YELLOW)is totaly cleaned $(NO_COLOR)\n";
+MSG_COMPILING = "$(COLOUR_YELLOW)$(bold)[🔥 Compiling 🔥]$(notbold)$(COLOUR_YELLOW) $(^)$(NO_COLOR)";
+MSG_READY = "$(PROJET_EMOJY) $(COLOUR_BLUE)$(bold)$(PROJECT) $(COLOUR_GREEN)$(bold)ready$(NO_COLOR)\n";
 
-$(PROG_NAME): $(OBJS) $(OBJS_BONUS)
-	@ar rsc $(PROG_NAME) $(OBJS_BONUS) $(OBJS)
-	@echo -n "\033[2K"
-	@$(call SUCCESS_MESSAGE, $(PROG_NAME))
+all: $(NAME)
 
-so:
-	@$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRCS)
-	gcc -nostartfiles -shared -o libft.so $(OBJS)
+$(NAME): $(OBJS) | $(OBJS_DIR)
+	@ar rcs $(NAME) $(OBJS)
+	$(DELET_LINE)
+	$(PRINT) $(MSG_READY)
 
-%.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo -n "\033[2K"
+$(OBJS): $(OBJS_DIR)/%.o: %.c | $(OBJS_DIR)
+	@mkdir -p $(@D)
+	$(DELET_LINE)
+	$(PRINT) $(MSG_COMPILING)
+	$(CC) -c $< -o $@
 
-bonus: $(OBJS_BONUS) $(OBJS)
-	ar rsc $(PROG_NAME) $(OBJS_BONUS) $(OBJS)
+$(OBJS_DIR):
+	$(SILENT)mkdir -p $@
 
 clean:
-	@rm -f $(OBJS) $(PROG_NAME) $(OBJS_BONUS)
-	@echo -n "\033[2K"
-	@$(call CLEANING_SUCCESS)
+	$(PRINT) $(MSG_CLEANING)
+	$(RM) $(OBJS_DIR)
+	$(DELET_LINE)
+	$(PRINT) $(MSG_CLEANED)
 
-fclean: clean
-	@rm -f $(PROG_NAME)
-	@echo -n "\033[2K"
-	@$(call CLEANING_SUCCESS)
+fclean:
+	$(PRINT) $(MSG_CLEANING)
+	$(RM) $(OBJS_DIR)
+	$(RM) $(NAME)
+	$(DELET_LINE)
+	$(PRINT) $(MSG_TOTALY_CLEANED)
 
 re: fclean all
 
-all: $(PROG_NAME)
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

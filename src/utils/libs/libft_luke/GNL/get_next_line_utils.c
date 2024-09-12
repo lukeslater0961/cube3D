@@ -3,38 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yroussea <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lslater <lslater@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/10 08:01:14 by yroussea          #+#    #+#             */
-/*   Updated: 2024/07/09 09:14:38 by yroussea         ###   ########.fr       */
+/*   Created: 2023/11/29 15:58:15 by luke              #+#    #+#             */
+/*   Updated: 2024/01/10 12:22:31 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "get_next_line.h"
 
-int	ft_find_bn(const char *s)
+char	*ft_strnjoin(char *s1, char *s2, size_t n)
 {
-	long long	i;
+	char		*s3;
+	size_t		i;
+	size_t		j;
 
 	i = 0;
-	while (s[i])
+	j = 0;
+	if (!s1 || !s2 || !n)
+		return (NULL);
+	s3 = ft_calloc(ft_strlen(s1) + n + 1, 1);
+	if (!s3)
+		return (NULL);
+	while (i < ft_strlen(s1))
 	{
-		if (s[i] == '\n')
-			return (i);
-		i += 1;
+		s3[i] = s1[i];
+		i++;
 	}
-	return (-1);
-}
-
-size_t	ft_strcpy_until_bn(const char *s, char *result)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] && s[i] != '\n')
+	while (j < ft_strlen(s2) && j < n)
 	{
-		(result)[i] = s[i];
-		i += 1;
+		s3[i + j] = s2[j];
+		j++;
 	}
-	return (i);
+	s3[i + j] = '\0';
+	free(s1);
+	return (s3);
 }

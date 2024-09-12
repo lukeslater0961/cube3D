@@ -6,7 +6,7 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:55:43 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/09/12 12:03:57 by lslater          ###   ########.fr       */
+/*   Updated: 2024/09/12 15:04:03 by bastienverdie    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ static int	check_textures(t_data *data)
 		if (ft_strncmp(texture, texture_prefixes[i], 2) != 0 || \
 			texture[2] != ' ')
 		{
-			ft_printf(2, "Error\n missing coordinates\n");
+			ft_printf_fd(2, "Error\n missing coordinates\n");
 			return (1);
 		}
 		if (texture[3] == '\0')
 		{
-			ft_printf(2, "Error\n missing texture path\n");
+			ft_printf_fd(2, "Error\n missing texture path\n");
 			return (1);
 		}
 		i++;
@@ -42,12 +42,12 @@ static int	check_colours(t_data *data)
 {
 	if (data->textures[4][0] == 'F' && data->textures[4][1] != ' ')
 	{
-		ft_printf(2, "Error\n the map file colour isn't formatted properly\n");
+		ft_printf_fd(2, "Error\n the map file colour isn't formatted properly\n");
 		return (1);
 	}
 	else if (data->textures[5][0] == 'C' && data->textures[5][1] != ' ')
 	{
-		ft_printf(2, "Error\n the map file colour isn't formatted properly\n");
+		ft_printf_fd(2, "Error\n the map file colour isn't formatted properly\n");
 		return (1);
 	}
 	return (0);

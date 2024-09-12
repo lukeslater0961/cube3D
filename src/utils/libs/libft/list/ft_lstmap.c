@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yroussea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/10 08:01:14 by yroussea          #+#    #+#             */
+/*   Created: 2023/11/03 13:50:54 by yroussea          #+#    #+#             */
 /*   Updated: 2024/07/09 09:14:38 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_find_bn(const char *s)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	long long	i;
+	t_list	*new;
+	t_list	*tmp;
 
-	i = 0;
-	while (s[i])
+	if (!lst || !f || !del)
+		return (NULL);
+	new = NULL;
+	while (lst)
 	{
-		if (s[i] == '\n')
-			return (i);
-		i += 1;
+		tmp = ft_lstnew(f(lst->content));
+		if (!tmp)
+		{
+			ft_lstclear(&new, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&new, tmp);
+		lst = lst->next;
 	}
-	return (-1);
-}
-
-size_t	ft_strcpy_until_bn(const char *s, char *result)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] && s[i] != '\n')
-	{
-		(result)[i] = s[i];
-		i += 1;
-	}
-	return (i);
+	return (new);
 }

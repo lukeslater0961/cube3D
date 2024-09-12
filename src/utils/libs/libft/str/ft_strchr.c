@@ -1,40 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yroussea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/10 08:01:14 by yroussea          #+#    #+#             */
+/*   Created: 2023/10/31 08:23:55 by yroussea          #+#    #+#             */
 /*   Updated: 2024/07/09 09:14:38 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_find_bn(const char *s)
+char	*ft_strchr(const char *s, int c)
 {
-	long long	i;
+	int	i;
 
 	i = 0;
-	while (s[i])
+	while (s && s[i])
 	{
-		if (s[i] == '\n')
-			return (i);
+		if (s[i] == (unsigned char)c)
+			return ((char *)(s + i));
 		i += 1;
 	}
-	return (-1);
-}
-
-size_t	ft_strcpy_until_bn(const char *s, char *result)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] && s[i] != '\n')
-	{
-		(result)[i] = s[i];
-		i += 1;
-	}
-	return (i);
+	if (s && s[i] == (unsigned char)c)
+		return ((char *)(s + i));
+	return (0);
 }

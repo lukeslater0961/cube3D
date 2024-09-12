@@ -3,125 +3,118 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lslater <lslater@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yroussea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 15:52:39 by luke              #+#    #+#             */
-/*   Updated: 2024/01/03 12:25:06 by lslater          ###   ########.fr       */
+/*   Created: 2023/11/09 08:09:54 by yroussea          #+#    #+#             */
+/*   Updated: 2024/07/09 09:14:38 by yroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../libft.h"
 
-char	*read_line(int fd, char *buffer, int *error)
+static void	*ft_free(char *s, char *buf)
 {
-	int		r_size;
-
-	r_size = read(fd, buffer, BUFFER_SIZE);
-	if (r_size == -1)
-	{
-		*error = -1;
-		free(buffer);
-		return (0);
-	}
-	else if (r_size == 0)
-	{
-		*error = 1;
-		free(buffer);
-		return (NULL);
-	}
-	buffer[r_size] = 0;
-	return (buffer);
+	if (s)
+		free(s);
+	if (buf)
+		free(buf);
+	return (NULL);
 }
 
-char	*get_line(char *buffer, char *line, int *v_line)
+static char	*ft_strjoin_until_bn(char *s1, const char *s2)
 {
-	char		*size;
-	int			mem_size;
+	size_t	i;
+	size_t	j;
+	char	*result;
 
-	size = ft_strchr(buffer, '\n');
-	mem_size = ft_strlen(&buffer[size - buffer]);
-	if (size == NULL && *buffer != 0)
+	j = 0;
+	i = 0;
+	if (!s1 || !s2)
+		return (NULL);
+	result = malloc(sizeof(char) * (1 + ft_strlen(s1) + ft_strlen(s2)));
+	result[0] = 0;
+	if (!result)
+		return (NULL);
+	i = ft_strcpy_until_bn(s1, result);
+	j = ft_strcpy_until_bn(s2, result + i);
+	if (s2[j] == '\n')
 	{
-		line = ft_strnjoin(line, buffer, ft_strlen(buffer));
+		result[i + j] = '\n';
+		i += 1;
 	}
-	else if (size != NULL && *buffer != 0)
-	{
-		line = ft_strnjoin(line, buffer, size - buffer + 1);
-		ft_memmove(buffer, &buffer[size - buffer + 1], mem_size);
-		*v_line = 1;
-		return (line);
-	}
-	return (line);
+	result[i + j] = '\0';
+	free(s1);
+	return (result);
 }
 
-char	*check_error(char *buffer, char *line, int error, int *error_msg)
+static char	*ft_read_until_bn(int fd, char *buf, char *s, char **rest)
 {
-	if (!buffer && error == 1)
+	int			r;
+	int			end;
+
+	r = 1;
+	while (r)
 	{
-		if (*line != 0)
-			return (line);
-		*error_msg = 1;
-		free(line);
-		return (NULL);
+		r = read(fd, buf, BUFFER_SIZE);
+		if (r == 0 && *rest)
+			free(*rest);
+		if (r == 0)
+			*rest = NULL;
+		if (r == -1 || r == 0)
+			return (s);
+		buf[r] = 0;
+		s = ft_strjoin_until_bn(s, buf);
+		end = ft_find_bn(buf);
+		if (end != -1)
+		{
+			if (*rest)
+				free(*rest);
+			*rest = ft_strdup(buf + end + 1);
+			return (s);
+		}
 	}
-	if (!buffer && error == -1)
-	{
-		*error_msg = 1;
-		free(line);
-		return (NULL);
-	}
-	else if ((*buffer == 0) || (!buffer && line && !*line))
-	{
-		*error_msg = 1;
-		free(line);
-		free(buffer);
-		return (0);
-	}
-	return (0);
+	return (s);
 }
 
-char	*process_line(char **buffer, char **line, int fd)
+static char	*get_line(char **rest, char *buf, int fd)
 {
-	int			error;
-	int			v_line;
-	int			error_msg;
+	char	*tmp;
+	int		end;
+	char	*s;
 
-	error_msg = 0;
-	v_line = 0;
-	error = 0;
-	while (*buffer && error != -1 && error != 1)
+	s = ft_calloc(1, 1);
+	if (!s)
+		return (ft_free(s, buf));
+	if (*rest)
 	{
-		*line = get_line(*buffer, *line, &v_line);
-		if (v_line != 0)
-			return (*line);
-		*buffer = read_line(fd, *buffer, &error);
-		check_error(*buffer, *line, error, &error_msg);
-		if (error_msg == 1)
-			return (NULL);
+		end = ft_find_bn(*rest);
+		s = ft_strjoin_until_bn(s, *rest);
+		if (end != -1)
+		{
+			tmp = *rest;
+			*rest = ft_strdup(*rest + end + 1);
+			free(tmp);
+			free(buf);
+			return (s);
+		}
 	}
-	if (**line && *line)
-		return (*line);
-	return (0);
+	s = ft_read_until_bn(fd, buf, s, rest);
+	if (!s || !*s)
+		return (ft_free(s, buf));
+	free(buf);
+	return (s);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer = NULL;
-	char		*line;
+	char		*buf;
+	static char	*rest[1024];
 
-	if (fd < 0)
+	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
-	if (BUFFER_SIZE < 0)
+	buf = malloc(BUFFER_SIZE + 1 * sizeof(char));
+	buf[0] = 0;
+	if (!buf)
 		return (NULL);
-	if (buffer == NULL)
-		buffer = ft_calloc(BUFFER_SIZE + 1, 1);
-	if (!buffer)
-		return (NULL);
-	line = ft_calloc(1, 1);
-	if (!line)
-	{
-		free(buffer);
-		return (buffer);
-	}
-	return (process_line(&buffer, &line, fd));
+	return (get_line(&(rest[fd]), buf, fd));
 }
