@@ -6,7 +6,7 @@
 #    By: basverdi <basverdi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/30 13:06:11 by yroussea          #+#    #+#              #
-#    Updated: 2024/07/10 17:54:22 by yroussea         ###   ########.fr        #
+#    Updated: 2024/09/12 15:29:21 by lslater          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,8 +82,8 @@ SRCS_FILES = char/ft_isalnum.c			\
 	type/ft_atoll.c				\
 	type/ft_itoa.c				\
 	type/ft_overflow.c			\
-	gnl/get_next_line.c			\
-	gnl/get_next_line_utils.c	\
+	GNL/get_next_line.c			\
+	GNL/get_next_line_utils.c	\
 	maths/vmin_vmax.c 			\
 	maths/ft_abs.c
 
