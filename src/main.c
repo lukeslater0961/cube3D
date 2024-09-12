@@ -6,7 +6,7 @@
 /*   By: bastienverdier-vaissiere <bastienverdier-  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:23:51 by bastienverdie     #+#    #+#             */
-/*   Updated: 2024/09/10 16:32:21 by bastienverdie    ###   ########.fr       */
+/*   Updated: 2024/09/12 13:55:16 by bastienverdie    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,32 @@
 int	main(int argc, char **argv)
 {
 	t_data	*data;
+	int	i;
 
+	i = 0;
 	if (argc == 2)
 	{
 		data = ft_calloc(sizeof(t_data), 1);
 		do_parsing(argv, data);
+		if (data->map)
+		{
+			while (data->map[i])
+			{
+				free(data->map[i]);
+				i++;
+			}
+			free(data->map);
+		}
+		if (data->flood_fill)
+		{
+			i = 0;
+			while (data->flood_fill[i])
+			{
+				free(data->flood_fill[i]);
+				i++;
+			}
+			free(data->flood_fill);
+		}
 	}
 	else
 		ft_printf(2, "not enough or too many arguments");
