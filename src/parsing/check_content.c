@@ -73,6 +73,7 @@ static int	parse_textures(t_data *data)
 		free(line);
 		i++;
 	}
+	get_next_line(-42);
 	print_tab(data->textures);//to be removed
 	if (check_textures(data) || check_colours(data))
 		return (1);

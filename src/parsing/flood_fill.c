@@ -33,23 +33,23 @@
 
 void	map_flood(t_data *data, int y, int x, int rows, int cols)
 {
-	if (data->flood_fill[y][x] == '7')
+	if (data->flood_fill[y][x] == '7' || data->flood_fill[y][x] == '1')
 		return ;
 	data->flood_fill[y][x] = '7';
-	if (y + 1 < rows - 1 && data->flood_fill[y + 1][x] != '1')
+	if (y + 1 < rows - 1 && data->flood_fill[y + 1][x] && data->flood_fill[y + 1][x] != '1' && data->flood_fill[y + 1][x] != ' ')
 		map_flood(data, y + 1, x, rows, cols);
-	if (x + 1 < cols - 1 && data->flood_fill[y][x + 1] != '1')
+	if (x + 1 < cols - 1 && data->flood_fill[y][x + 1] && data->flood_fill[y][x + 1] != '1' && data->flood_fill[y][x + 1] != ' ')
 		map_flood(data, y, x + 1, rows, cols);
-	if (y - 1 >= 1 && data->flood_fill[y - 1][x] != '1')
+	if (y - 1 >= 1 && data->flood_fill[y - 1][x] && data->flood_fill[y - 1][x] != '1' && data->flood_fill[y - 1][x] != ' ')
 		map_flood(data, y - 1, x, rows, cols);
-	if (x - 1 >= 1 && data->flood_fill[y][x - 1] != '1')
+	if (x - 1 >= 1 && data->flood_fill[y][x - 1] && data->flood_fill[y - 1][x] != '1' && data->flood_fill[y][x - 1] != ' ')
 		map_flood(data, y, x - 1, rows, cols);
-	// if (y + 2 < rows - 1 && data->flood_fill[y + 2][x] != '1' && data->flood_fill[y + 2][x] != ' ' && data->flood_fill[y + 2][x] != '\n')
-	// 	map_flood(data, y + 2, x, rows, cols);
-	// if (x + 2 < cols - 1 && data->flood_fill[y][x + 2] != '1' && data->flood_fill[y][x + 2] != ' ' && data->flood_fill[y][x + 2] != '\n')
-	// 	map_flood(data, y, x + 2, rows, cols);
-	// if (y - 2 >= 1 && data->flood_fill[y - 2][x] != '1' && data->flood_fill[y - 2][x] != ' ')
-	// 	map_flood(data, y - 2, x, rows, cols);
-	// if (x - 2 >= 1 && data->flood_fill[y][x - 2] != '1' && data->flood_fill[y][x - 2] != ' ')
-	// 	map_flood(data, y, x - 2, rows, cols);
+	if (y + 2 < rows - 1 && data->flood_fill[y + 2][x] && data->flood_fill[y + 2][x] != '1' && data->flood_fill[y + 2][x] != ' ' && data->flood_fill[y + 2][x] != '\n')
+		map_flood(data, y + 2, x, rows, cols);
+	if (x + 2 < cols - 1 && data->flood_fill[y][x + 2] && data->flood_fill[y][x + 2] != '1' && data->flood_fill[y][x + 2] != ' ' && data->flood_fill[y][x + 2] != '\n')
+	 	map_flood(data, y, x + 2, rows, cols);
+	if (y - 2 >= 1 && data->flood_fill[y - 2][x] && data->flood_fill[y - 2][x] != '1' && data->flood_fill[y - 2][x] != ' ')
+	 	map_flood(data, y - 2, x, rows, cols);
+	if (x - 2 >= 1 && data->flood_fill[y][x - 2] && data->flood_fill[y][x - 2] != '1' && data->flood_fill[y][x - 2] != ' ')
+	 	map_flood(data, y, x - 2, rows, cols);
 }

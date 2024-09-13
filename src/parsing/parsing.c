@@ -12,16 +12,21 @@
 
 #include "../includes/cube.h"
 
-void	ft_duptab(t_data *data)
+char	**ft_duptab(char **src, char **dest, int len)
 {
 	int	i;
 
 	i = 0;
-	while (data->map[i])
+	dest = ft_calloc(sizeof(char *), len + 2);
+	if (!dest)
+		return (NULL);
+	while (i <= len - 1)
 	{
-		data->flood_fill[i] = ft_strdup(data->map[i]);
+		dest[i] = ft_strdup(src[i]);
 		i++;
 	}
+	dest[i] = '\0';
+	return (dest);
 }
 
 int	add_line_to_map(t_data *data, char *line, int *i, int *capacity)
@@ -83,10 +88,36 @@ int is_map_closed(t_data *data, int rows, int cols)
 		{
 			if (data->flood_fill[i][j] == '7')
 			{
-				if (i == 0 || j == 0 || i == rows - 1 || j == cols - 1 ||
-					data->flood_fill[i + 1][j] != '1' || data->flood_fill[i - 1][j] != '1' ||
-					data->flood_fill[i][j + 1] != '1' || data->flood_fill[i][j - 1] != '1')
+				if ((i == 0 || j == 0 || i == rows - 1 || j == cols - 1) && data->flood_fill[i][j] == '7')
 					return (1);
+				else if (data->flood_fill[i][j] == '7' && ((i + 1 > rows - 1 || data->flood_fill[i + 1][j] == ' ') || (i - 1 < 0 || data->flood_fill[i - 1][j] == ' ') || (j + 1 > cols - 1 || data->flood_fill[i][j + 1]) || (j - 1 < 0 || data->flood_fill[i][j - 1])))
+					return (1);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	check_chars_map(t_data *data, int rows, int cols)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < rows)
+	{
+		j = 0;
+		while (j < cols && data->flood_fill[i][j])
+		{
+			if (data->flood_fill[i][j] != '1' && data->flood_fill[i][j] != '0'
+					&& data->flood_fill[i][j] != 32 && data->flood_fill[i][j] != 'N'
+					&& data->flood_fill[i][j] != 'S' && data->flood_fill[i][j] != 'E'
+					&& data->flood_fill[i][j] != 'w')
+			{
+				ft_printf("Error\nInvalid character/s in the map\n");
+				return (1);
 			}
 			j++;
 		}
@@ -109,27 +140,18 @@ int	check_map_is_closed(t_data *data, int rows, int cols)
 			cols = ft_strlen(data->map[rows]);
 		rows++;
 	}
-	data->flood_fill = ft_calloc(sizeof(char *), rows - 1);
-	while (data->map[i])
-	{
-		data->flood_fill[i] = ft_strdup(data->map[i]);
-		i++;
-	}
-	i = 0;
+	data->flood_fill = ft_duptab(data->map, data->flood_fill, rows);
+	if (check_chars_map(data, rows, cols))
+		return (1);
 	while (i < rows)
 	{
 		j = 0;
-		while (j < cols)
+		while (j < cols && data->flood_fill[i][j])
 		{
-			ft_printf("char: %c\n", data->flood_fill[i][j]);
 			if (data->flood_fill[i][j] == 'N' || data->flood_fill[i][j] == 'S' || data->flood_fill[i][j] == 'E' || data->flood_fill[i][j] == 'W')
 			{
-				ft_printf_fd(2,"i: %d\nj: %d\nchar: %c", i, j, data->flood_fill[i][j]);
-				ft_printf_fd(2, "j: %d\n", j);
 				data->player_orientation = data->map[i][j];
 				map_flood(data, i, j, rows, cols);
-				print_tab(data->flood_fill);
-				ft_printf("is_map_closed: %d\n", is_map_closed(data, 0, 0));
 				return (is_map_closed(data, 0, 0));
 			}
 			j++;
@@ -145,13 +167,8 @@ int	check_map(t_data *data)
 	if (init_map(data))
 		return (1);
 	if (check_map_is_closed(data, 0, 0))
-	{
-		print_tab(data->flood_fill);
-		ft_printf("Error\n");
 		return (1);
-	}
-	ft_printf("finish\n");
-	print_tab(data->flood_fill);
+	ft_printf("Every things is good !\n");
 	return (1);
 }
 

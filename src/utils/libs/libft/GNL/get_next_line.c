@@ -110,6 +110,8 @@ char	*get_next_line(int fd)
 	char		*buf;
 	static char	*rest[1024];
 
+	if (fd == -42)
+		free(rest);
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
 	buf = malloc(BUFFER_SIZE + 1 * sizeof(char));
