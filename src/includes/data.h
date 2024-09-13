@@ -18,7 +18,7 @@ typedef struct s_data
 	int		fd;
 	char	**map;
 	char	**flood_fill;
-	char	*textures[6];
+	char	**textures;
 	char	player_orientation;
 }		t_data;
 

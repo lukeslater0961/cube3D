@@ -12,6 +12,20 @@
 
 #include "../../includes/cube.h"
 
+void	print_texture(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	ft_printf("Textures:\n");
+	while (data->textures[i])
+	{
+		ft_printf("\"%s\"\n", data->textures[i]);
+		i++;
+	}
+	ft_printf("\n\n");
+}
+
 void print_tab(char **tab)
 {
 	int	i;

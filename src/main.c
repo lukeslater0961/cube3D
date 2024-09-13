@@ -41,6 +41,7 @@ int	main(int argc, char **argv)
 			}
 			free(data->flood_fill);
 		}
+		free(data);
 	}
 	else
 		ft_printf_fd(2, "not enough or too many arguments");

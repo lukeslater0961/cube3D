@@ -59,22 +59,33 @@ static int	parse_textures(t_data *data)
 	char	*line;
 
 	i = 0;
-	line = NULL;
-	while (!data->textures[5])
+	line = get_next_line(data->fd);
+	data->textures = ft_calloc(sizeof(char *), 8);
+	while (line && i <= 5)
 	{
-		line = get_next_line(data->fd);
 		if (!line)
+		{
+			free(line);
+			line = get_next_line(-42);
 			return (1);
+		}
+		if (ft_strncmp(line, "\n", 1) == 0)
+		{
+			free(line);
+			line = get_next_line(data->fd);
+			continue ;
+		}
 		if (ft_strlen(line) && line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
-		if (ft_strlen(line) <= 0)
-			continue ;
 		data->textures[i] = ft_strdup(line);
 		free(line);
 		i++;
+		line = get_next_line(data->fd);
 	}
-	get_next_line(-42);
-	print_tab(data->textures);//to be removed
+	data->textures[i] = ft_strdup("\0");
+	print_texture(data);
+	close(data->fd);
+	free(line);
 	if (check_textures(data) || check_colours(data))
 		return (1);
 	return (0);
