@@ -6,7 +6,7 @@
 /*   By: bastienverdier-vaissiere <bastienverdier-  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:40:58 by bastienverdie     #+#    #+#             */
-/*   Updated: 2024/09/16 13:44:07 by lslater          ###   ########.fr       */
+/*   Updated: 2024/09/16 18:37:59 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ int	check_map_is_closed(t_data *data, int rows, int cols)
 	}
 	if (rows >= 600 || cols >= 600)
 	{
-		ft_printf("Error\nVa te faire enculer\n");
+		ft_printf("Error\n map too big\n");
 		return (1);
 	}
 	data->flood_fill = ft_duptab(data->map, data->flood_fill, rows, cols);

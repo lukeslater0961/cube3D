@@ -6,7 +6,7 @@
 /*   By: yroussea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 08:04:16 by yroussea          #+#    #+#             */
-/*   Updated: 2024/07/09 09:14:38 by yroussea         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:59:20 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	**ft_split(char const *s, char c)
 {
 	char	**result;
 
-	if (!s)
+	if (!s)	
 		return (NULL);
 	result = ft_calloc(sizeof(char *), (ft_len_split(s, c) + 1));
 	if (!result)

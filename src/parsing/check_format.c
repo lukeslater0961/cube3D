@@ -6,13 +6,13 @@
 /*   By: bastienverdier-vaissiere <bastienverdier-  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:48:17 by bastienverdie     #+#    #+#             */
-/*   Updated: 2024/09/12 15:03:38 by bastienverdie    ###   ########.fr       */
+/*   Updated: 2024/09/16 18:59:37 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube.h"
 
-static int  check_extension(char *filename)
+int  check_extension(char *filename)
 {
     char    *extension;
 
@@ -27,7 +27,7 @@ static int  check_extension(char *filename)
 	return (0);
 }
 
-static  int  check_directory(char *filename, t_data *data)
+int  check_directory(char *filename, t_data *data, int type)
 {
     int fd;
 
@@ -42,7 +42,10 @@ static  int  check_directory(char *filename, t_data *data)
         ft_printf_fd(2, "Error\n File doesn't exist\n");
         return (1);
     }
-    data->fd = fd;
+	if (type == -42)
+		data->fd = fd;
+	else
+		data->fd_textures[type] = fd;
     return (0);
 }
 
@@ -50,7 +53,7 @@ int check_file(char *filename, t_data *data)
 {
 	if (check_extension(filename))
         return (1);
-	if (check_directory(filename, data))
+	if (check_directory(filename, data, -42))
 		return (1);
 	return (0);
 }
