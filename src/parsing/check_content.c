@@ -6,7 +6,7 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:55:43 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/09/12 15:04:03 by bastienverdie    ###   ########.fr       */
+/*   Updated: 2024/09/16 11:49:09 by bastienverdie    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ static int	parse_textures(t_data *data)
 		line = get_next_line(data->fd);
 	}
 	data->textures[i] = ft_strdup("\0");
-	print_texture(data);
-	close(data->fd);
 	free(line);
 	if (check_textures(data) || check_colours(data))
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: bastienverdier-vaissiere <bastienverdier-  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:40:58 by bastienverdie     #+#    #+#             */
-/*   Updated: 2024/09/12 15:15:20 by bastienverdie    ###   ########.fr       */
+/*   Updated: 2024/09/16 11:49:24 by bastienverdie    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int init_map(t_data *data)
     data->map = ft_calloc(capacity, sizeof(char *));
     if (!data->map)
         return (1);
-
     while (line)
     {
         if (ft_strlen(line) && line[ft_strlen(line) - 1] == '\n')
@@ -71,6 +70,7 @@ int init_map(t_data *data)
         free(line);
         line = get_next_line(data->fd);
     }
+	close(data->fd);
     data->map[i] = NULL;
     return (0);
 }
@@ -177,8 +177,14 @@ int do_parsing(char **argv, t_data *data)
 	if (check_file(argv[1], data))
 		return (1);
 	if (check_file_content(data))
+	{
+		close(data->fd);
 		return (1);
+	}
 	if (check_map(data))
+	{
+		close(data->fd);
 		return (1);
+	}
 	return (0);
 }
