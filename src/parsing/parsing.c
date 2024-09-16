@@ -6,26 +6,39 @@
 /*   By: bastienverdier-vaissiere <bastienverdier-  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:40:58 by bastienverdie     #+#    #+#             */
-/*   Updated: 2024/09/16 11:49:24 by bastienverdie    ###   ########.fr       */
+/*   Updated: 2024/09/16 13:44:07 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube.h"
 
-char	**ft_duptab(char **src, char **dest, int len)
+#include <stdio.h>
+
+char	**ft_duptab(char **src, char **dest, int len, int cols)
 {
 	int	i;
+	size_t	j;
+	size_t ncols;
 
+	ncols = cols;	
 	i = 0;
+	j = 0;
 	dest = ft_calloc(sizeof(char *), len + 2);
 	if (!dest)
 		return (NULL);
 	while (i <= len - 1)
 	{
-		dest[i] = ft_strdup(src[i]);
+		dest[i] = ft_calloc(sizeof(char *), cols + 2);
+		ft_strlcpy(dest[i], src[i], cols + 1);
+		j = ft_strlen(src[i]);
+		while (j < ncols)
+		{
+			dest[i][j] = '\0';
+			j++;
+		}
 		i++;
 	}
-	dest[i] = '\0';
+	dest[i] = NULL;
 	return (dest);
 }
 
@@ -89,9 +102,15 @@ int is_map_closed(t_data *data, int rows, int cols)
 			if (data->flood_fill[i][j] == '7')
 			{
 				if ((i == 0 || j == 0 || i == rows - 1 || j == cols - 1) && data->flood_fill[i][j] == '7')
+				{
+					ft_printf("Error\nMap not closed\n");
 					return (1);
-				else if (data->flood_fill[i][j] == '7' && ((i + 1 > rows - 1 || data->flood_fill[i + 1][j] == ' ') || (i - 1 < 0 || data->flood_fill[i - 1][j] == ' ') || (j + 1 > cols - 1 || data->flood_fill[i][j + 1]) || (j - 1 < 0 || data->flood_fill[i][j - 1])))
+				}
+				else if ((i + 1 > rows - 1 || data->flood_fill[i + 1][j] == ' ' || !data->flood_fill[i + 1][j]) || (i - 1 < 0 || data->flood_fill[i - 1][j] == ' ' || !data->flood_fill[i - 1][j]) || (j + 1 > cols - 1 || data->flood_fill[i][j + 1] == ' ' || !data->flood_fill[i][j + 1]) || (j - 1 < 0 || data->flood_fill[i][j - 1] == ' ' || !data->flood_fill[i][j - 1]))
+				{
+					ft_printf("Error\nMap not closed\n");
 					return (1);
+				}
 			}
 			j++;
 		}
@@ -140,7 +159,12 @@ int	check_map_is_closed(t_data *data, int rows, int cols)
 			cols = ft_strlen(data->map[rows]);
 		rows++;
 	}
-	data->flood_fill = ft_duptab(data->map, data->flood_fill, rows);
+	if (rows >= 600 || cols >= 600)
+	{
+		ft_printf("Error\nVa te faire enculer\n");
+		return (1);
+	}
+	data->flood_fill = ft_duptab(data->map, data->flood_fill, rows, cols);
 	if (check_chars_map(data, rows, cols))
 		return (1);
 	while (i < rows)
@@ -152,7 +176,13 @@ int	check_map_is_closed(t_data *data, int rows, int cols)
 			{
 				data->player_orientation = data->map[i][j];
 				map_flood(data, i, j, rows, cols);
-				return (is_map_closed(data, 0, 0));
+				int k = 0;
+				while (data->flood_fill[k])
+				{
+					printf("%s\n", data->flood_fill[k]);
+					k++;
+				}
+				return (is_map_closed(data, rows, cols));
 			}
 			j++;
 		}

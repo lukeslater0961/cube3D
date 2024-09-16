@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "includes/cube.h"
+#include <stdio.h>
+
 
 int	main(int argc, char **argv)
 {
@@ -20,6 +22,7 @@ int	main(int argc, char **argv)
 	i = 0;
 	if (argc == 2)
 	{
+
 		data = ft_calloc(sizeof(t_data), 1);
 		do_parsing(argv, data);
 		if (data->map)
