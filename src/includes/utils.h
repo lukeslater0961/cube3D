@@ -6,7 +6,7 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 17:35:16 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/09/16 18:58:37 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/09/17 13:38:02 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,7 @@
 
 void	print_texture(t_data *data);
 void	print_tab(char **tab);
+int		print_error(char *str);
+int		free_tab_print_err(char *str, char **tab);
 
 #endif

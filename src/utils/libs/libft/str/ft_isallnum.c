@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
+/*   ft_isallnum.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lslater <lslater@student.42.fr>            +#+  +:+       +#+        */
+/*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/10 02:03:37 by luke              #+#    #+#             */
-/*   Updated: 2023/11/11 16:16:00 by lslater          ###   ########.fr       */
+/*   Created: 2024/09/17 12:18:26 by basverdi          #+#    #+#             */
+/*   Updated: 2024/09/17 12:21:04 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void*))
+t_bool	ft_isallnum(char *str)
 {
-	if (!lst || !del)
-		return ;
-	if (lst->content)
-		del(lst->content);
-	free(lst);
+	while (*str)
+	{
+		if (!ft_isnum(*str))
+			return (FALSE);
+		str++;
+	}
+	return (TRUE);
 }

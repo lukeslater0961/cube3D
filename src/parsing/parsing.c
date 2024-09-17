@@ -6,7 +6,7 @@
 /*   By: bastienverdier-vaissiere <bastienverdier-  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:40:58 by bastienverdie     #+#    #+#             */
-/*   Updated: 2024/09/16 18:37:59 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/09/17 13:31:07 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,15 +102,9 @@ int is_map_closed(t_data *data, int rows, int cols)
 			if (data->flood_fill[i][j] == '7')
 			{
 				if ((i == 0 || j == 0 || i == rows - 1 || j == cols - 1) && data->flood_fill[i][j] == '7')
-				{
-					ft_printf("Error\nMap not closed\n");
-					return (1);
-				}
+					return (print_error(MAP_OPEN));
 				else if ((i + 1 > rows - 1 || data->flood_fill[i + 1][j] == ' ' || !data->flood_fill[i + 1][j]) || (i - 1 < 0 || data->flood_fill[i - 1][j] == ' ' || !data->flood_fill[i - 1][j]) || (j + 1 > cols - 1 || data->flood_fill[i][j + 1] == ' ' || !data->flood_fill[i][j + 1]) || (j - 1 < 0 || data->flood_fill[i][j - 1] == ' ' || !data->flood_fill[i][j - 1]))
-				{
-					ft_printf("Error\nMap not closed\n");
-					return (1);
-				}
+					return (print_error(MAP_OPEN));
 			}
 			j++;
 		}
@@ -134,10 +128,7 @@ int	check_chars_map(t_data *data, int rows, int cols)
 					&& data->flood_fill[i][j] != 32 && data->flood_fill[i][j] != 'N'
 					&& data->flood_fill[i][j] != 'S' && data->flood_fill[i][j] != 'E'
 					&& data->flood_fill[i][j] != 'w')
-			{
-				ft_printf("Error\nInvalid character/s in the map\n");
-				return (1);
-			}
+				return (print_error(INV_CHAR));
 			j++;
 		}
 		i++;
@@ -145,50 +136,48 @@ int	check_chars_map(t_data *data, int rows, int cols)
 	return (0);
 }
 
-int	check_map_is_closed(t_data *data, int rows, int cols)
+int	check_map_is_closed(t_data *data)
 {
 	int	i;
 	int	j;
 
-	cols = 0;
-	rows = 0;
 	i = 0;
-	while (data->map[rows])
+	data->rows = 0;
+	data->cols = 0;
+	while (data->map[data->rows])
 	{
-		if (ft_strlen(data->map[rows]) > (size_t)cols)
-			cols = ft_strlen(data->map[rows]);
-		rows++;
+		if (ft_strlen(data->map[data->rows]) > (size_t)data->cols)
+			data->cols = ft_strlen(data->map[data->rows]);
+		data->rows++;
 	}
-	if (rows >= 600 || cols >= 600)
-	{
-		ft_printf("Error\n map too big\n");
+	if (data->rows >= 600 || data->cols >= 600)
+		return (print_error(MAP_BIG));
+	data->flood_fill = ft_duptab(data->map, data->flood_fill, data->rows, data->cols);
+	if (check_chars_map(data, data->rows, data->cols))
 		return (1);
-	}
-	data->flood_fill = ft_duptab(data->map, data->flood_fill, rows, cols);
-	if (check_chars_map(data, rows, cols))
-		return (1);
-	while (i < rows)
+	while (i < data->rows)
 	{
 		j = 0;
-		while (j < cols && data->flood_fill[i][j])
+		while (j < data->cols && data->flood_fill[i][j])
 		{
 			if (data->flood_fill[i][j] == 'N' || data->flood_fill[i][j] == 'S' || data->flood_fill[i][j] == 'E' || data->flood_fill[i][j] == 'W')
 			{
+				ft_printf("%c\n", data->map[i][j]);
 				data->player_orientation = data->map[i][j];
-				map_flood(data, i, j, rows, cols);
+				map_flood(data, i, j);
 				int k = 0;
 				while (data->flood_fill[k])
 				{
 					printf("%s\n", data->flood_fill[k]);
 					k++;
 				}
-				return (is_map_closed(data, rows, cols));
+				return (is_map_closed(data, data->rows, data->cols));
 			}
 			j++;
 		}
 		i++;
 	}
-	ft_printf_fd(1, "Error\nPlayer not found");
+	print_error(NO_PLAYER);
 	return (1);
 }
 
@@ -196,7 +185,7 @@ int	check_map(t_data *data)
 {
 	if (init_map(data))
 		return (1);
-	if (check_map_is_closed(data, 0, 0))
+	if (check_map_is_closed(data))
 		return (1);
 	ft_printf("Every things is good !\n");
 	return (1);

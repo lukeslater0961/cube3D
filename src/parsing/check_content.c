@@ -6,13 +6,11 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:55:43 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/09/16 18:59:22 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/09/17 14:11:50 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube.h"
-#include <fcntl.h>
-#include <unistd.h>
 
 int	check_rgb(char **texture)
 {
@@ -23,61 +21,39 @@ int	check_rgb(char **texture)
 	if (!rgb)
 		return (1);
 	if (!rgb[1] || !rgb[2])
-	{
-		ft_magic_free("%2", rgb);
-		return (1);
-	}
+		return (free_tab_print_err("", rgb));
 	i = 0;
 	while (i < 3)
 	{
+		if (!ft_isallnum(rgb[i]))
+			return (free_tab_print_err("", rgb));
 		if (ft_atoi(rgb[i]) < 0 || ft_atoi(rgb[i]) > 255)
-		{
-			ft_magic_free("%2", rgb);
-			return (1);
-		}
+			return (free_tab_print_err("", rgb));
 		i++;
 	}
+	ft_magic_free("%2", rgb);
 	return (0);
 }
 
 static int	check_textures(t_data *data)
 {
-	const char	*texture_prefixes[6] = {"NO", "SO", "WE", "EA", "F", "C"};
+	const char	*texture_prefixes[4] = {"NO", "SO", "WE", "EA"};
 	char		**texture;
 	int			i;
 
 	i = 0;
-	data->fd_textures = ft_calloc(sizeof(int), 7);
-	data->colors = ft_calloc(sizeof(char *), 3);
-	texture = NULL;
-	while (i <= 5)
+	data->fd_textures = ft_calloc(sizeof(int), 4);
+	if (!data->fd_textures)
+		return (print_error(MALLOC));
+	while (i < 4)
 	{
 		texture = ft_split(data->textures[i], ' ');
-		if (texture[i] && ((i < 4 && ft_strncmp(texture[0], texture_prefixes[i], 2)) || (i > 3 && ft_strncmp(texture[0], texture_prefixes[i], 1))!= 0 ))
-		{
-			ft_magic_free("%2", texture);
-			ft_printf_fd(2, "Error\n missing coordinates\n");
-			return (1);
-		}
+		if (!texture[0] || (i < 4 && ft_strncmp(texture[0], texture_prefixes[i], 2)))
+			return (free_tab_print_err(MISSING_COORD, texture));
 		if (!ft_strncmp(texture[1], "\0", ft_strlen(texture[1])))
-		{
-			ft_magic_free("%2", texture);
-			ft_printf_fd(2, "Error\n missing texture path or color\n");
-			return (1);
-		}
-		if (i > 3 && check_rgb(texture))
-		{
-			ft_magic_free("%2", texture);
-			ft_printf_fd(2, "Error\n the color isn't a rgb format\n");
-			return (1);
-		}
+			return (free_tab_print_err(MISSING_TPATH, texture));
 		else if (i < 4 && check_directory(texture[1], data, i))
-		{	
-			ft_magic_free("%2", texture);
-			return (1);
-		}
-		if (i > 3)
-			data->colors[i - 4] = ft_strdup(texture[3]);
+			return (free_tab_print_err("", texture));
 		i++;
 		ft_magic_free("%2", texture);
 	}
@@ -86,15 +62,24 @@ static int	check_textures(t_data *data)
 
 static int	check_colours(t_data *data)
 {
-	if (data->textures[4][0] == 'F' && data->textures[4][1] != ' ')
+	const char	*texture_prefixes[2] = {"F", "C"};
+	char		**texture;
+	int			i;
+
+	i = 4;
+	data->colors = ft_calloc(sizeof(char *), 3);
+	if (!data->colors)
+		return (print_error(MALLOC));
+	while (i <= 5)
 	{
-		ft_printf_fd(2, "Error\n the map file colour isn't formatted properly\n");
-		return (1);
-	}
-	else if (data->textures[5][0] == 'C' && data->textures[5][1] != ' ')
-	{
-		ft_printf_fd(2, "Error\n the map file colour isn't formatted properly\n");
-		return (1);
+		texture = ft_split(data->textures[i], ' ');
+		if (!texture[0] || (ft_strncmp(texture[0], texture_prefixes[i - 4], 1)))
+			return (free_tab_print_err(MISSING_COLOR,texture));
+		if (check_rgb(texture))
+			return (free_tab_print_err(RGB_FORMAT, texture));
+		data->colors[i - 4] = ft_strdup(texture[1]);
+		ft_magic_free("%2", texture);
+		i++;
 	}
 	return (0);
 }
@@ -128,10 +113,11 @@ static int	parse_textures(t_data *data)
 		i++;
 		line = get_next_line(data->fd);
 	}
-	data->textures[i] = ft_strdup("\0");
+	data->textures[i] = NULL;
 	free(line);
 	if (check_textures(data) || check_colours(data))
-		return (1);
+		return (free_tab_print_err("", data->textures));
+	ft_magic_free("%2", data->textures);
 	return (0);
 }
 

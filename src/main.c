@@ -6,11 +6,13 @@
 /*   By: bastienverdier-vaissiere <bastienverdier-  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:23:51 by bastienverdie     #+#    #+#             */
-/*   Updated: 2024/09/16 18:25:40 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/09/17 14:09:53 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cube.h"
+#include "includes/utils.h"
+#include "utils/libs/libft/libft.h"
 
 
 int	main(int argc, char **argv)
@@ -24,10 +26,17 @@ int	main(int argc, char **argv)
 
 		data = ft_calloc(sizeof(t_data), 1);
 		do_parsing(argv, data);
-		ft_magic_free("%2 %2", data->map, data->flood_fill);
+		if (data->map)
+			ft_magic_free("%2", data->map);
+		if (data->flood_fill)
+			ft_magic_free("%2", data->flood_fill);
+		if (data->fd_textures)
+			ft_magic_free("%1", data->fd_textures);
+		if (data->colors)
+			ft_magic_free("%2", data->colors);
 		free(data);
 	}
 	else
-		ft_printf_fd(2, "not enough or too many arguments");
+		return (print_error(ARG));
 	return (0);
 }

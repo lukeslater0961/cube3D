@@ -10,12 +10,13 @@ LIBS_DIR = $(SRCS_DIR)/utils/libs
 
 LIBS = $(LIBS_DIR)/libft/libft.a \
 
-SRCS_FILES = main.c \
-			 parsing/parsing.c \
-			 parsing/check_format.c \
-			 parsing/check_content.c \
-			 parsing/flood_fill.c \
-			 utils/print/print.c
+SRCS_FILES = main.c						\
+			 parsing/parsing.c			\
+			 parsing/check_format.c		\
+			 parsing/check_content.c	\
+			 parsing/flood_fill.c		\
+			 utils/print/print.c		\
+			 utils/print/print_errors.c
 
 SRCS = 	$(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 OBJS = $(subst $(SRCS_DIR)/,$(OBJS_DIR)/, $(subst .c,.o, $(SRCS)))

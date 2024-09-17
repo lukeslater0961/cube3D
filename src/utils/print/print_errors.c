@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   print_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lslater <lslater@student.42.fr>            +#+  +:+       +#+        */
+/*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 16:03:22 by luke              #+#    #+#             */
-/*   Updated: 2024/07/10 16:07:43 by lslater          ###   ########.fr       */
+/*   Created: 2024/09/17 13:04:49 by basverdi          #+#    #+#             */
+/*   Updated: 2024/09/17 13:39:18 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../../includes/cube.h"
 
-int	ft_putstrp_fd(char *str, int fd)
+int	free_tab_print_err(char *str, char **tab)
 {
-	int	len;
-
-	len = ft_strlen(str);
+	ft_magic_free("%2", tab);
 	if (!str)
-		return (write(fd, "(null)", 6));
-	write(fd, str, len);
-	return (len);
+		return (1);
+	return (print_error(str));
+}
+
+int	print_error(char *str)
+{
+	ft_printf_fd(2,"\e[0;31mError\e[0;m\n%s\n", str);
+	return (1);
 }

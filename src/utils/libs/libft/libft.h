@@ -6,7 +6,7 @@
 /*   By: bastienverdier-vaissiere <bastienverdie    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 10:31:20 by yroussea          #+#    #+#             */
-/*   Updated: 2024/09/12 14:59:57 by bastienverd      ###   ########.fr       */
+/*   Updated: 2024/09/17 12:22:50 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ long long	ft_atoll(char *s);
 char		*ft_itoa(int n);
 t_bool		ft_overflow(char *s);
 
+t_bool		ft_isallnum(char *str);
 int			ft_isalnum(int c);
 int			is_alphanum_underscore(char c);
 int			ft_isalpha(int c);

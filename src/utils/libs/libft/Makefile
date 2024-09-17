@@ -6,7 +6,7 @@
 #    By: basverdi <basverdi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/30 13:06:11 by yroussea          #+#    #+#              #
-#    Updated: 2024/09/12 15:29:21 by lslater          ###   ########.fr        #
+#    Updated: 2024/09/17 12:23:37 by basverdi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ CFLAGS = -Wall -Wextra -Werror
 
 OBJS_DIR = obj
 
-SRCS_FILES = char/ft_isalnum.c			\
+SRCS_FILES = str/ft_isallnum.c	\
+	char/ft_isalnum.c			\
 	char/ft_isalpha.c			\
 	char/ft_isascii.c			\
 	char/ft_isdigit.c			\
