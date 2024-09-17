@@ -6,7 +6,7 @@
 /*   By: bastienverdier-vaissiere <bastienverdier-  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:40:58 by bastienverdie     #+#    #+#             */
-/*   Updated: 2024/09/17 14:28:22 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/09/17 15:46:58 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,47 +44,57 @@ char	**ft_duptab(char **src, char **dest, int len, int cols)
 
 int	add_line_to_map(t_data *data, char *line, int *i, int *capacity)
 {
-    if (*i >= *capacity)
+	int	j;
+	char	**new_map;
+
+	j = 0;
+    if (*i + 1 >= *capacity)
     {
         *capacity *= 2;
-        char **new_map = ft_calloc(*capacity, sizeof(char *));
+        new_map = ft_calloc(*capacity, sizeof(char *));
         if (!new_map)
             return (1);
-        for (int j = 0; j < *i; j++)
+		while (j < *i)
+		{
             new_map[j] = data->map[j];
-        free(data->map);
+			j++;
+		}
+		free(data->map);
         data->map = new_map;
     }
     data->map[*i] = ft_strdup(line);
     if (!data->map[*i])
         return (1);
     (*i)++;
+    data->map[*i] = NULL;
     return (0);
 }
 
 int init_map(t_data *data)
 {
-    char *line;
-    int i = 0;
-    int capacity = 1;
+    char	*line;
+    int		i;
+    int		capacity;
 
+	i = 0;
+	capacity = 1;
     line = get_next_line(data->fd);
-    if (!line)
-        return (1);
     data->map = ft_calloc(capacity, sizeof(char *));
     if (!data->map)
         return (1);
     while (line)
     {
         if (ft_strlen(line) && line[ft_strlen(line) - 1] == '\n')
-            line[ft_strlen(line) - 1] = '\0';
-        if (ft_strlen(line) > 0 && add_line_to_map(data, line, &i, &capacity))
+		{
+			if (ft_strlen(line) > 1 || (i == 0 && ft_strlen(line)))
+				line[ft_strlen(line) - 1] = '\0';
+		}
+		if (ft_strlen(line) > 0 && add_line_to_map(data, line, &i, &capacity))
             return (1);
         free(line);
         line = get_next_line(data->fd);
     }
 	close(data->fd);
-    data->map[i] = NULL;
     return (0);
 }
 
@@ -149,6 +159,7 @@ int	check_map_is_closed(t_data *data)
 		if (ft_strlen(data->map[data->rows]) > (size_t)data->cols)
 			data->cols = ft_strlen(data->map[data->rows]);
 		data->rows++;
+		i++;
 	}
 	if (data->rows * data->cols >= 360000)
 		return (print_error(MAP_BIG));
@@ -162,7 +173,6 @@ int	check_map_is_closed(t_data *data)
 		{
 			if (data->flood_fill[i][j] == 'N' || data->flood_fill[i][j] == 'S' || data->flood_fill[i][j] == 'E' || data->flood_fill[i][j] == 'W')
 			{
-				ft_printf("%c\n", data->map[i][j]);
 				data->player_orientation = data->map[i][j];
 				map_flood(data, i, j);
 				int k = 0;
