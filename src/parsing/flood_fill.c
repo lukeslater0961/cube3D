@@ -6,7 +6,7 @@
 /*   By: lslater <lslater@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 11:29:51 by lslater           #+#    #+#             */
-/*   Updated: 2024/09/18 09:21:49 by lslater          ###   ########.fr       */
+/*   Updated: 2024/09/18 11:51:08 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	flood_loop(t_data *data, int y, int x)
 		j = 0;
 		while (j < data->cols)
 		{
-			printf("flood fill loop check %c, i = %d\n", data->flood_fill[i][j], i);
 			if (data->flood_fill[i][j] == '0')
 				map_flood(data, i, j);
 			j++;

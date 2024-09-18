@@ -6,7 +6,7 @@
 /*   By: bastienverdier-vaissiere <bastienverdier-  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:40:58 by bastienverdie     #+#    #+#             */
-/*   Updated: 2024/09/18 09:00:53 by lslater          ###   ########.fr       */
+/*   Updated: 2024/09/18 11:52:13 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,12 +174,6 @@ int	check_map_is_closed(t_data *data)
 			{
 				data->player_orientation = data->map[i][j];
 				flood_loop(data, i, j);
-				int k = 0;//to be removed
-				while (data->flood_fill[k])
-				{
-					printf("%s\n", data->flood_fill[k]);
-					k++;
-				}
 				return (is_map_closed(data, data->rows, data->cols));
 			}
 			j++;

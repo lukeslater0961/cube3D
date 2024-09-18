@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data.h                                             :+:      :+:    :+:   */
+/*   graphique.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
+/*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/10 16:22:52 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/09/17 13:01:50 by basverdi         ###   ########.fr       */
+/*   Created: 2024/09/18 11:38:02 by basverdi          #+#    #+#             */
+/*   Updated: 2024/09/18 11:47:36 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_H
-# define DATA_H
+#include "../includes/cube.h"
 
-typedef struct s_data
+int	init_graphique(t_data *data)
 {
-	int		fd;
-	int		*fd_textures;
-	char	**colors;
-	char	**map;
-	int		rows;
-	int		cols;
-	char	**flood_fill;
-	char	**textures;
-	char	player_orientation;
-}		t_data;
+	t_mlx	*mlx;
 
-#endif 
+	(void)data;
+	mlx = ft_calloc(sizeof(mlx), 1);
+	if (init_wimdows(mlx, data))
+		return (1);
+	return (0);
+}

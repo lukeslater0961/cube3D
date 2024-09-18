@@ -6,7 +6,7 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:23:12 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/09/17 13:57:50 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:01:38 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUBE_H
 
 # include "parsing.h"
-# include "data.h"
+# include "struct.h"
 # include "utils.h"
 # include "library.h"
 

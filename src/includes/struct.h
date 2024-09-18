@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/11 15:39:26 by bananabread       #+#    #+#             */
-/*   Updated: 2024/09/18 12:01:51 by basverdi         ###   ########.fr       */
+/*   Created: 2024/09/10 16:22:52 by bastienverd       #+#    #+#             */
+/*   Updated: 2024/09/18 12:01:26 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#ifndef STRUCT_H
+# define STRUCT_H
 
-# include "struct.h"
+typedef struct s_mlx
+{
+	void				*mlx;
+	void				*window;
+}				t_mlx;
 
-int		check_file(char *filename, t_data *data);
-int		check_directory(char *filename, t_data *data, int type);
-int		do_parsing(char **argv, t_data *data);
-int		check_file_content(t_data *data);
-void	map_flood(t_data *data, int y, int x);
-void	flood_loop(t_data *data, int y, int x);
+typedef struct s_data
+{
+	int		fd;
+	int		*fd_textures;
+	char	**colors;
+	char	**map;
+	int		rows;
+	int		cols;
+	char	**flood_fill;
+	char	**textures;
+	char	player_orientation;
+}			t_data;
 
-#endif
+#endif 
