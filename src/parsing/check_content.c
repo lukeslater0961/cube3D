@@ -6,7 +6,7 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:55:43 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/09/17 14:46:21 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/09/18 09:23:59 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static int	check_textures(t_data *data)
 	while (i < 4)
 	{
 		texture = ft_split(data->textures[i], ' ');
-		if (!texture[0] || (i < 4 && ft_strncmp(texture[0], texture_prefixes[i], 2)))
+		if (!texture[0] || (i < 4 && ft_strncmp(texture[0], \
+			texture_prefixes[i], 2)))
 			return (free_tab_print_err(MISSING_COORD, texture));
 		if (!ft_strncmp(texture[1], "\0", ft_strlen(texture[1])))
 			return (free_tab_print_err(MISSING_TPATH, texture));
@@ -74,7 +75,7 @@ static int	check_colours(t_data *data)
 	{
 		texture = ft_split(data->textures[i], ' ');
 		if (!texture[0] || (ft_strncmp(texture[0], texture_prefixes[i - 4], 1)))
-			return (free_tab_print_err(MISSING_COLOR,texture));
+			return (free_tab_print_err(MISSING_COLOR, texture));
 		if (check_rgb(texture))
 			return (free_tab_print_err(RGB_FORMAT, texture));
 		data->colors[i - 4] = ft_strdup(texture[1]);
