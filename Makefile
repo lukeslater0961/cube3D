@@ -9,6 +9,7 @@ OBJS_DIR = obj
 LIBS_DIR = $(SRCS_DIR)/utils/libs
 
 LIBS = $(LIBS_DIR)/libft/libft.a \
+	   $(LIBS_DIR)/minilibx-linux/libmlx.a \
 
 SRCS_FILES = main.c						\
 			 parsing/parsing.c			\
