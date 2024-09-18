@@ -6,7 +6,7 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:21:03 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/09/18 10:00:40 by lslater          ###   ########.fr       */
+/*   Updated: 2024/09/18 11:45:51 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string.h>
 
 # include "../utils/libs/libft/libft.h"
-# include "../utils/libs/minilibx-linux/mlx.h"
+# include "../utils/libs/MacroLibX/includes/mlx.h"
+# include "../utils/libs/MacroLibX/includes/mlx_profile.h"
 
 #endif
