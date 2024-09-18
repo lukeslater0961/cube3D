@@ -6,7 +6,7 @@
 /*   By: bastienverdier-vaissiere <bastienverdier-  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:23:51 by bastienverdie     #+#    #+#             */
-/*   Updated: 2024/09/18 09:22:37 by lslater          ###   ########.fr       */
+/*   Updated: 2024/09/18 14:51:48 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		data = ft_calloc(sizeof(t_data), 1);
-		do_parsing(argv, data);
+		if (!do_parsing(argv, data))
+			init_graphique(data);
 		if (data->map)
 			ft_magic_free("%2", data->map);
 		if (data->flood_fill)
