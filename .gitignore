@@ -1,0 +1,6 @@
+.DS_Store
+*.o
+cube
+*.cube
+*.a
+maze-env/
