@@ -44,10 +44,10 @@ MSG_TOTALY_CLEANED = "$(COLOUR_RED)$(bold)[🗑️ ]$(PROJECT) $(notbold)$(COLOU
 MSG_COMPILING = "$(COLOUR_YELLOW)$(bold)[💧 Compiling 💧]$(notbold)$(COLOUR_YELLOW) $(^)$(NO_COLOR)";
 MSG_READY = "$(PROJET_EMOJY) $(COLOUR_BLUE)$(bold)$(PROJECT) $(COLOUR_GREEN)$(bold)ready$(NO_COLOR)\n";
 
-BANNER = $(PRINT) "$(COLOUR_PURPULE) ____  _   _  ____  __    _____  ___  _____  ____  _   _  ____  ____  ___ \n"
-BANNER1 = printf "$(COLOUR_PURPULE)(  _ \( )_( )(_  _)(  )  (  _  )/ __)(  _  )(  _ \( )_( )( ___)(  _ \/ __) \n"
-BANNER2 = printf "$(COLOUR_PURPULE) )___/ ) _ (  _)(_  )(__  )(_)( \__ \ )(_)(  )___/ ) _ (  )__)  )   /\__ \ \n"
-BANNER3 = printf "$(COLOUR_PURPULE)(__)  (_) (_)(____)(____)(_____)(___/(_____)(__)  (_) (_)(____)(_)\_)(___/\n\n"
+BANNER = $(PRINT) "$(COLOUR_PURPULE)   ___  __  __  ____  ____  ___  ____            \n"
+BANNER1 = printf "$(COLOUR_PURPULE) / __)(  )(  )(  _ \( ___)(__ )(  _ \ \n"
+BANNER2 = printf "$(COLOUR_PURPULE)( (__  )(__)(  ) _ < )__)  (_ \ )(_) )\n"
+BANNER3 = printf "$(COLOUR_PURPULE) \___)(______)(____/(____)(___/(____/ \n\n"
 
 HEADER = $(BANNER);$(BANNER1);$(BANNER2);$(BANNER3); \
 
