@@ -6,7 +6,7 @@
 /*   By: lslater <lslater@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:03:15 by lslater           #+#    #+#             */
-/*   Updated: 2024/09/19 13:26:48 by lslater          ###   ########.fr       */
+/*   Updated: 2024/09/19 16:12:00 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,19 @@ void	gen_minimap(t_mlx *mlx, t_data *data)
 		j = 0;
 		while (j < (data->cols * HEIGHT))
 		{
-			if (data->map[i / HEIGHT][j / WIDTH] == '1' && i != (data->ppos_y * HEIGHT) && j != (data->ppos_x * WIDTH))
+			if (i / HEIGHT == data->ppos_y  && j / WIDTH == data->ppos_x)
+				mlx_pixel_put(mlx->mlx, mlx->winmap, j + data->x_pixels, i + data->y_pixels, 0xFFFF0000);
+			if (data->map[i / HEIGHT][j / WIDTH] == '1' && i != (data->ppos_y * HEIGHT + data->y_pixels) && j != (data->ppos_x * WIDTH + data->x_pixels))
 				mlx_pixel_put(mlx->mlx, mlx->winmap, j, i, 0xFFFF00FF);
-			else if (data->map[i / HEIGHT][j / WIDTH] == '0' && i != (data->ppos_y * HEIGHT) && j != (data->ppos_x * WIDTH))
+			else if (data->map[i / HEIGHT][j / WIDTH] == '0' && i != (data->ppos_y * HEIGHT + data->y_pixels) && j != (data->ppos_x * WIDTH + data->x_pixels))
 				mlx_pixel_put(mlx->mlx, mlx->winmap, j, i, 0xFF0C0C0C);
-			else if (data->map[i / HEIGHT][j / WIDTH] == ' ' && i != (data->ppos_y * HEIGHT) && j != (data->ppos_x * WIDTH))
+			else if (data->map[i / HEIGHT][j / WIDTH] == ' ' && i != (data->ppos_y * HEIGHT + data->y_pixels) && j != (data->ppos_x * WIDTH + data->x_pixels))
 				mlx_pixel_put(mlx->mlx, mlx->winmap, j, i, 0xFF000000);
 			else if (!data->map[i / HEIGHT][j / WIDTH])
 			{
 				j++;
 				continue;
 			}
-			else
-				mlx_pixel_put(mlx->mlx, mlx->winmap, data->ppos_x * HEIGHT, data->ppos_y * HEIGHT, 0xFFFF0000);
 			j++;
 		}
 		i++;
