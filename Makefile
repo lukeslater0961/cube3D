@@ -18,7 +18,9 @@ SRCS_FILES = main.c						\
 			 parsing/flood_fill.c		\
 			 utils/print/print.c		\
 			 utils/print/print_errors.c \
-			 graphique/graphique.c
+			 graphique/graphique.c		\
+			 graphique/window_mngmnt.c	\
+			 graphique/minimap_mngmnt.c	\
 
 SRCS = 	$(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 OBJS = $(subst $(SRCS_DIR)/,$(OBJS_DIR)/, $(subst .c,.o, $(SRCS)))

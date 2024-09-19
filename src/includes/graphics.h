@@ -6,7 +6,7 @@
 /*   By: lslater <lslater@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:07:13 by lslater           #+#    #+#             */
-/*   Updated: 2024/09/18 13:08:47 by lslater          ###   ########.fr       */
+/*   Updated: 2024/09/19 12:07:54 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # include "struct.h"
 
-int	init_graphique(t_data *data);
+int		init_graphique(t_data *data);
+void	gen_minimap(t_mlx *mlx, t_data *data);
 
+int		init_window(t_mlx *mlx, t_data *data);
+int		windowmap_hook(int event, void* param);
+int		window_hook(int event, void* param);
 #endif
