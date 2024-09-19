@@ -173,6 +173,8 @@ int	check_map_is_closed(t_data *data)
 			if (data->flood_fill[i][j] == 'N' || data->flood_fill[i][j] == 'S' || data->flood_fill[i][j] == 'E' || data->flood_fill[i][j] == 'W')
 			{
 				data->player_orientation = data->map[i][j];
+				data->ppos_y = i;
+				data->ppos_x = j;
 				flood_loop(data, i, j);
 				return (is_map_closed(data, data->rows, data->cols));
 			}

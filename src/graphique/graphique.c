@@ -6,7 +6,7 @@
 /*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 11:38:02 by basverdi          #+#    #+#             */
-/*   Updated: 2024/09/19 12:07:10 by lslater          ###   ########.fr       */
+/*   Updated: 2024/09/19 13:11:57 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,14 @@ int	keyboard_hook(int event, void* param)
 	mlx = (t_mlx *)param;
 	if (event == 41)
 		mlx_loop_end(mlx->mlx);
-	if (event == 26)
-		ft_printf("%d", event);
+	if (event == 26 && mlx->winmap)
+		move_player(mlx, -1, 0);
 	if (event == 4)
-		ft_printf("%d", event);
+		move_player(mlx, 0, -1);
 	if (event == 22)
-		ft_printf("%d", event);
+		move_player(mlx, 1, 0);
 	if (event == 7)
-		ft_printf("%d", event);
-	if (event == 41)
-		ft_printf("%d", event);
-	if (event == 41)
-		ft_printf("%d", event);
+		move_player(mlx, 0, 1);
 	else
 		ft_printf("%d", event);
 	return (0);
@@ -45,6 +41,7 @@ int	init_graphique(t_data *data)
 	if (!mlx)
 		return (1);
 	mlx->mlx = mlx_init();
+	mlx->data = data;
 	ft_printf("%p\n", mlx->mlx);
 	if (init_window(mlx, data))
 		return (1);

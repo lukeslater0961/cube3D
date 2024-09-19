@@ -6,19 +6,12 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:22:52 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/09/18 14:13:51 by lslater          ###   ########.fr       */
+/*   Updated: 2024/09/19 12:59:17 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
-
-typedef struct s_mlx
-{
-	void	*mlx;
-	void	*win;
-	void	*winmap;
-}				t_mlx;
 
 typedef struct s_data
 {
@@ -31,6 +24,17 @@ typedef struct s_data
 	char	**flood_fill;
 	char	**textures;
 	char	player_orientation;
+	int		ppos_y;
+	int		ppos_x;
 }			t_data;
+
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+	void	*winmap;
+	t_data	*data;
+}				t_mlx;
+
 
 #endif 

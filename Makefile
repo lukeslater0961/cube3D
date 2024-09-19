@@ -21,6 +21,7 @@ SRCS_FILES = main.c						\
 			 graphique/graphique.c		\
 			 graphique/window_mngmnt.c	\
 			 graphique/minimap_mngmnt.c	\
+			 graphique/player_mngmnt.c	\
 
 SRCS = 	$(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 OBJS = $(subst $(SRCS_DIR)/,$(OBJS_DIR)/, $(subst .c,.o, $(SRCS)))
