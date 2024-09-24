@@ -38,7 +38,7 @@ def save_maze_as_cub(maze, filename):
             file.write("".join(map(str, row)) + "\n")
 
 if __name__ == "__main__":
-    width, height = 1000, 1000  # Specify the size of the maze
+    width, height = 5, 1000  # Specify the size of the maze
     maze = generate_maze(width, height)
     save_maze_as_cub(maze, "maze.cub")
     print("Maze generated and saved as maze.cub")

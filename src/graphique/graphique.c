@@ -6,7 +6,7 @@
 /*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 11:38:02 by basverdi          #+#    #+#             */
-/*   Updated: 2024/09/19 13:11:57 by lslater          ###   ########.fr       */
+/*   Updated: 2024/09/24 07:09:59 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	keyboard_hook(int event, void* param)
 	mlx = (t_mlx *)param;
 	if (event == 41)
 		mlx_loop_end(mlx->mlx);
-	if (event == 26 && mlx->winmap)
+	if (event == 26)
 		move_player(mlx, -1, 0);
 	if (event == 4)
 		move_player(mlx, 0, -1);
@@ -50,8 +50,7 @@ int	init_graphique(t_data *data)
 	mlx_on_event(mlx->mlx, mlx->winmap, MLX_WINDOW_EVENT, windowmap_hook, mlx);
 	mlx_on_event(mlx->mlx, mlx->win, MLX_KEYDOWN, keyboard_hook, mlx);
 	mlx_loop(mlx->mlx);
-	if (mlx->winmap)
-		mlx_destroy_window(mlx->mlx, mlx->winmap);
+	mlx_destroy_window(mlx->mlx, mlx->winmap);
 	mlx_destroy_window(mlx->mlx, mlx->win);
 	mlx_destroy_display(mlx->mlx);
 	return (0);
