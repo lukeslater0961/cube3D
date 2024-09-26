@@ -6,7 +6,7 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:22:52 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/09/19 15:19:38 by lslater          ###   ########.fr       */
+/*   Updated: 2024/09/26 13:11:13 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_data
 	int		ppos_x;
 	int		x_pixels;
 	int		y_pixels;
+	float	p_angle;		
 }			t_data;
 
 typedef struct s_mlx
@@ -37,6 +38,5 @@ typedef struct s_mlx
 	void	*winmap;
 	t_data	*data;
 }				t_mlx;
-
 
 #endif 

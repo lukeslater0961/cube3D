@@ -6,7 +6,7 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:23:12 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/09/18 14:38:01 by lslater          ###   ########.fr       */
+/*   Updated: 2024/09/26 12:43:43 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include "utils.h"
 # include "library.h"
 # include "graphics.h"
+
+# define PI 3.1415926535
 
 # define WIDTH 8
 # define HEIGHT	8

@@ -6,7 +6,7 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:21:03 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/09/18 11:45:51 by lslater          ###   ########.fr       */
+/*   Updated: 2024/09/26 12:32:25 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <string.h>
+# include <math.h>
 
 # include "../utils/libs/libft/libft.h"
 # include "../utils/libs/MacroLibX/includes/mlx.h"

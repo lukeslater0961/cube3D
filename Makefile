@@ -16,6 +16,7 @@ SRCS_FILES = main.c						\
 			 parsing/check_format.c		\
 			 parsing/check_content.c	\
 			 parsing/flood_fill.c		\
+			 parsing/utils.c			\
 			 utils/print/print.c		\
 			 utils/print/print_errors.c \
 			 graphique/graphique.c		\
