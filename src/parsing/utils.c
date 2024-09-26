@@ -6,7 +6,7 @@
 /*   By: lslater <lslater@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 12:58:13 by lslater           #+#    #+#             */
-/*   Updated: 2024/09/26 13:02:31 by lslater          ###   ########.fr       */
+/*   Updated: 2024/09/26 15:42:19 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,17 @@ int	is_map_closed(t_data *data, int rows, int cols)
 		{
 			if (data->flood_fill[i][j] == '7')
 			{
-				if ((i == 0 || j == 0 || i == rows - 1 || j == cols - 1) && data->flood_fill[i][j] == '7')
+				if ((i == 0 || j == 0 || i == rows - 1 || j == cols - 1)
+					&& data->flood_fill[i][j] == '7')
 					return (print_error(MAP_OPEN));
-				else if ((i + 1 > rows - 1 || data->flood_fill[i + 1][j] == ' ' || !data->flood_fill[i + 1][j]) || (i - 1 < 0 || data->flood_fill[i - 1][j] == ' ' || !data->flood_fill[i - 1][j]) || (j + 1 > cols - 1 || data->flood_fill[i][j + 1] == ' ' || !data->flood_fill[i][j + 1]) || (j - 1 < 0 || data->flood_fill[i][j - 1] == ' ' || !data->flood_fill[i][j - 1]))
+				else if ((i + 1 > rows - 1 || data->flood_fill[i + 1][j] == ' '
+					|| !data->flood_fill[i + 1][j]) || (i - 1 < 0
+						|| data->flood_fill[i - 1][j] == ' '
+						|| !data->flood_fill[i - 1][j]) || (j + 1 > cols - 1
+						|| data->flood_fill[i][j + 1] == ' '
+						|| !data->flood_fill[i][j + 1]) || (j - 1 < 0
+						|| data->flood_fill[i][j - 1] == ' '
+						|| !data->flood_fill[i][j - 1]))
 					return (print_error(MAP_OPEN));
 			}
 			j++;
@@ -133,8 +141,10 @@ int	check_chars_map(t_data *data, int rows, int cols)
 		while (j < cols && data->flood_fill[i][j])
 		{
 			if (data->flood_fill[i][j] != '1' && data->flood_fill[i][j] != '0'
-					&& data->flood_fill[i][j] != 32 && data->flood_fill[i][j] != 'N'
-					&& data->flood_fill[i][j] != 'S' && data->flood_fill[i][j] != 'E'
+					&& data->flood_fill[i][j] != 32
+					&& data->flood_fill[i][j] != 'N'
+					&& data->flood_fill[i][j] != 'S'
+					&& data->flood_fill[i][j] != 'E'
 					&& data->flood_fill[i][j] != 'w')
 				return (print_error(INV_CHAR));
 			j++;

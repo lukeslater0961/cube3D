@@ -6,13 +6,13 @@
 /*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 11:38:02 by basverdi          #+#    #+#             */
-/*   Updated: 2024/09/26 15:16:42 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:39:22 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube.h"
 
-int	keyboard_hook(int event, void* param)
+int	keyboard_hook(int event, void *param)
 {
 	t_mlx	*mlx;
 
@@ -42,7 +42,6 @@ int	init_graphique(t_data *data)
 		return (1);
 	mlx->mlx = mlx_init();
 	mlx->data = data;
-	ft_printf("%p\n", mlx->mlx);
 	if (init_window(mlx, data))
 		return (1);
 	gen_minimap(mlx, data);

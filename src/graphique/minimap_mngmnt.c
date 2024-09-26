@@ -6,7 +6,7 @@
 /*   By: lslater <lslater@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:03:15 by lslater           #+#    #+#             */
-/*   Updated: 2024/09/26 15:15:19 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:29:07 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ void	gen_minimap(t_mlx *mlx, t_data *data)
 		count_j = 0;
 		j = 0;
 		while (count_j < (data->cols * WIDTH))
-		{
+		{	
 			if (data->map[count_i / HEIGHT][count_j / WIDTH] == '1' && i != data->ppos_y && j != data->ppos_x)
 				mlx_pixel_put(mlx->mlx, mlx->winmap, count_j, count_i, 0xFFFF0000);
 			else if ((data->map[count_i / HEIGHT][count_j / WIDTH] == '0' || data->map[count_i / HEIGHT][count_j / WIDTH] == 'S') && i != data->ppos_y && j != data->ppos_x)
 				mlx_pixel_put(mlx->mlx, mlx->winmap, count_j, count_i, 0xFFDDCC00);
 			else if (data->map[count_i / HEIGHT][count_j / WIDTH] == ' ' && i != data->ppos_y && j != data->ppos_x)
 				mlx_pixel_put(mlx->mlx, mlx->winmap, count_j, count_i, 0xFF0000FF);
-			else if (!data->map[count_i / HEIGHT][count_j / WIDTH])
+			else if (i > 0 && j > 0 && !data->map[count_i / HEIGHT][count_j / WIDTH - 1])
 			{
 				count_j++;
 				continue;

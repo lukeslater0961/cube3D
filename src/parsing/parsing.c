@@ -6,7 +6,7 @@
 /*   By: bastienverdier-vaissiere <bastienverdier-  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:40:58 by bastienverdie     #+#    #+#             */
-/*   Updated: 2024/09/26 14:31:14 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:45:08 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	check_map_is_closed(t_data *data)
 	}
 	if (data->rows * data->cols >= 360000)
 		return (print_error(MAP_BIG));
-	data->flood_fill = ft_duptab(data->map, data->flood_fill, data->rows, data->cols);
+	data->flood_fill = ft_duptab(data->map, data->flood_fill,
+			data->rows, data->cols);
 	if (check_chars_map(data, data->rows, data->cols))
 		return (1);
 	while (i < data->rows)
@@ -36,7 +37,8 @@ int	check_map_is_closed(t_data *data)
 		j = 0;
 		while (j < data->cols && data->flood_fill[i][j])
 		{
-			if (data->flood_fill[i][j] == 'N' || data->flood_fill[i][j] == 'S' || data->flood_fill[i][j] == 'E' || data->flood_fill[i][j] == 'W')
+			if (data->flood_fill[i][j] == 'N' || data->flood_fill[i][j] == 'S'
+			|| data->flood_fill[i][j] == 'E' || data->flood_fill[i][j] == 'W')
 			{
 				data->player_orientation = data->map[i][j];
 				data->ppos_y = i;
