@@ -6,7 +6,7 @@
 /*   By: lslater <lslater@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:03:15 by lslater           #+#    #+#             */
-/*   Updated: 2024/09/24 08:23:38 by lslater          ###   ########.fr       */
+/*   Updated: 2024/09/26 15:15:19 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,33 @@ int	clear_minimap(t_mlx *mlx)
 
 void	gen_minimap(t_mlx *mlx, t_data *data)
 {
-	int	i = 0;
-	int	j = 0;
+	float	i = 0;
+	float	j = 0;
+	int		count_i = 0;
+	int		count_j = 0;
 
-	while (i < (data->rows * HEIGHT))
+	printf("x: %f\n", data->ppos_x);
+	while (count_i < (data->rows * HEIGHT))
 	{
+		count_j = 0;
 		j = 0;
-		while (j < (data->cols * HEIGHT))
+		while (count_j < (data->cols * WIDTH))
 		{
-			if (data->map[i / HEIGHT][j / WIDTH] == '1' && i != (data->ppos_y * HEIGHT + data->y_pixels) && j != (data->ppos_x * WIDTH + data->x_pixels))
-				mlx_pixel_put(mlx->mlx, mlx->winmap, j, i, 0xFFFF00FF);
-			else if (data->map[i / HEIGHT][j / WIDTH] == '0' && i != (data->ppos_y * HEIGHT + data->y_pixels) && j != (data->ppos_x * WIDTH + data->x_pixels))
-				mlx_pixel_put(mlx->mlx, mlx->winmap, j, i, 0xFF0C0C0C);
-			else if (data->map[i / HEIGHT][j / WIDTH] == ' ' && i != (data->ppos_y * HEIGHT + data->y_pixels) && j != (data->ppos_x * WIDTH + data->x_pixels))
-				mlx_pixel_put(mlx->mlx, mlx->winmap, j, i, 0xFF000000);
-			else if (!data->map[i / HEIGHT][j / WIDTH])
+			if (data->map[count_i / HEIGHT][count_j / WIDTH] == '1' && i != data->ppos_y && j != data->ppos_x)
+				mlx_pixel_put(mlx->mlx, mlx->winmap, count_j, count_i, 0xFFFF0000);
+			else if ((data->map[count_i / HEIGHT][count_j / WIDTH] == '0' || data->map[count_i / HEIGHT][count_j / WIDTH] == 'S') && i != data->ppos_y && j != data->ppos_x)
+				mlx_pixel_put(mlx->mlx, mlx->winmap, count_j, count_i, 0xFFDDCC00);
+			else if (data->map[count_i / HEIGHT][count_j / WIDTH] == ' ' && i != data->ppos_y && j != data->ppos_x)
+				mlx_pixel_put(mlx->mlx, mlx->winmap, count_j, count_i, 0xFF0000FF);
+			else if (!data->map[count_i / HEIGHT][count_j / WIDTH])
 			{
-				j++;
+				count_j++;
 				continue;
 			}
-			j++;
+			count_j++;
+			j += 0.125;
 		}
-		i++;
+		count_i++;
+		i += 0.125;
 	}
 }

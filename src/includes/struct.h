@@ -6,7 +6,7 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:22:52 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/09/26 13:11:13 by lslater          ###   ########.fr       */
+/*   Updated: 2024/09/26 13:26:07 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ typedef struct s_data
 	char	**flood_fill;
 	char	**textures;
 	char	player_orientation;
-	int		ppos_y;
-	int		ppos_x;
-	int		x_pixels;
-	int		y_pixels;
+	float	ppos_y;
+	float	ppos_x;
+	float	x_pixels;
+	float	y_pixels;
 	float	p_angle;		
 }			t_data;
 

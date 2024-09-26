@@ -6,7 +6,7 @@
 /*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 11:38:02 by basverdi          #+#    #+#             */
-/*   Updated: 2024/09/24 07:09:59 by lslater          ###   ########.fr       */
+/*   Updated: 2024/09/26 15:16:42 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ int	keyboard_hook(int event, void* param)
 	if (event == 41)
 		mlx_loop_end(mlx->mlx);
 	if (event == 26)
-		move_player(mlx, -1, 0);
+		move_player(mlx, -0.125, 0);
 	if (event == 4)
-		move_player(mlx, 0, -1);
+		move_player(mlx, 0, -0.125);
 	if (event == 22)
-		move_player(mlx, 1, 0);
+		move_player(mlx, 0.125, 0);
 	if (event == 7)
-		move_player(mlx, 0, 1);
+		move_player(mlx, 0, 0.125);
 	else
 		ft_printf("%d", event);
 	return (0);
