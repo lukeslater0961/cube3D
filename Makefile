@@ -61,7 +61,7 @@ all: $(NAME)
 $(NAME): $(OBJS) | $(OBJS_DIR)
 	$(HEADER)
 	@make -s -j -C $(LIBS_DIR)/libft
-	$(CC) $^ -o $@ $(LIBS)
+	$(CC) $^ -o $@ $(LIBS) -lm
 	$(DELET_LINE)
 	$(PRINT) $(MSG_READY)
 

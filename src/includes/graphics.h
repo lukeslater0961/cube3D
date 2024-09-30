@@ -6,7 +6,7 @@
 /*   By: lslater <lslater@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:07:13 by lslater           #+#    #+#             */
-/*   Updated: 2024/09/26 15:33:26 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:53:34 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ int		init_graphique(t_data *data);
 void	gen_minimap(t_mlx *mlx, t_data *data);
 int		clear_minimap(t_mlx *mlx);
 
-void	move_player(t_mlx *mlx, float y, float x);
+//void	move_player(t_mlx *mlx, float y, float x);
+void move_player(t_mlx *mlx, float speed);
+void	rotate_player(t_mlx *mlx, t_data *data, int	r_angle);
 
 int		init_window(t_mlx *mlx, t_data *data);
 int		windowmap_hook(int event, void *param);

@@ -6,7 +6,7 @@
 /*   By: lslater <lslater@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:03:15 by lslater           #+#    #+#             */
-/*   Updated: 2024/09/26 15:29:07 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:40:26 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,44 @@ int	clear_minimap(t_mlx *mlx)
 	ft_printf(" clearing minimap\n");
 	mlx_clear_window(mlx->mlx, mlx->winmap);
 	return (0);
+}
+
+void draw_direction_line(t_mlx *mlx, t_data *data)
+{
+    int line_length = 10; // Length of the direction line
+    float end_x, end_y;
+
+    end_x = data->ppos_x + line_length * cos(data->p_angle);
+    end_y = data->ppos_y + line_length * sin(data->p_angle);
+
+    int x0 = (int)(data->ppos_x * WIDTH);
+    int y0 = (int)(data->ppos_y * HEIGHT);
+    int x1 = (int)(end_x * WIDTH);
+    int y1 = (int)(end_y * HEIGHT);
+
+    int dx = abs(x1 - x0);
+    int dy = abs(y1 - y0);
+    int sx = (x0 < x1) ? 1 : -1;
+    int sy = (y0 < y1) ? 1 : -1;
+    int err = dx - dy;
+
+    while (x0 != x1 || y0 != y1)
+    {
+        // Ensure the pixel is within bounds before drawing
+        if (x0 >= 0 && x0 < mlx->data->cols * WIDTH && y0 >= 0 && y0 < mlx->data->rows * HEIGHT)
+            mlx_pixel_put(mlx->mlx, mlx->winmap, x0, y0, 0xFF00FFF0); // Draw the line in green
+        int e2 = err * 2;
+        if (e2 > -dy)
+		{
+            err -= dy;
+            x0 += sx;
+        }
+        if (e2 < dx)
+        {
+            err += dx;
+            y0 += sy;
+        }
+    }
 }
 
 void	gen_minimap(t_mlx *mlx, t_data *data)
@@ -50,4 +88,5 @@ void	gen_minimap(t_mlx *mlx, t_data *data)
 		count_i++;
 		i += 0.125;
 	}
+	draw_direction_line(mlx, data);
 }
