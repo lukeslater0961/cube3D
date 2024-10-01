@@ -6,7 +6,7 @@
 /*   By: lslater <lslater@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:27:13 by lslater           #+#    #+#             */
-/*   Updated: 2024/09/30 16:11:51 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/01 09:34:07 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ void rotate_player(t_mlx *mlx, t_data *data, int r_angle)
  
 	clear_minimap(mlx);
 	if (r_angle == 1)
-		angle_step = -0.125;
+		angle_step = -0.05;
 	else
-		angle_step = 0.125;
+		angle_step = 0.05;
     data->p_angle += angle_step;
     normalize_angle(&data->p_angle);
-    printf("Rotating Player: p_angle = %f\n", data->p_angle);
+    printf("Rotating Player: p_angle = %f\n", data->p_angle);//to be removed
 	gen_minimap(mlx, mlx->data);
 }
 
@@ -79,15 +79,9 @@ void	move_player(t_mlx *mlx, float speed)
 		do_pacman(mlx, speed, speed);
 	else
 	{
-		if ( mlx->data->p_angle >= 0.09 && mlx->data->p_angle <= 1.46)
-		{
-			speed = -speed;
-			mlx->data->ppos_y += speed * cos(mlx->data->p_angle);
-			mlx->data->ppos_x += speed * sin(mlx->data->p_angle);
-		}
-		mlx->data->ppos_y += speed * cos(mlx->data->p_angle);
-		mlx->data->ppos_x += speed * sin(mlx->data->p_angle);
+		mlx->data->ppos_y += speed * sin(mlx->data->p_angle);
+		mlx->data->ppos_x += speed * cos(mlx->data->p_angle);
 		gen_minimap(mlx, mlx->data);
 	}
-    printf("Rotating Player: p_angle = %f\n", mlx->data->p_angle);
+    printf("Rotating Player: p_angle = %f\n", mlx->data->p_angle);// to be removed
 }

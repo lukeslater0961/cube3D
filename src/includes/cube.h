@@ -6,7 +6,7 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:23:12 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/09/26 15:13:30 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/10/01 09:38:19 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 # define PI 3.1415926535
 
-# define WIDTH 8
-# define HEIGHT	8
+# define WIDTH 16
+# define HEIGHT	16
 
 # define ARG "Too many or not enough arguments"
 # define MALLOC "malloc failed"
