@@ -6,7 +6,7 @@
 /*   By: lslater <lslater@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:27:13 by lslater           #+#    #+#             */
-/*   Updated: 2024/10/01 09:34:07 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/01 12:27:54 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void rotate_player(t_mlx *mlx, t_data *data, int r_angle)
 
 void	do_pacman(t_mlx *mlx, float y, float x)
 {
-	if (mlx->data->ppos_y + y >= mlx->data->rows)
+	if (mlx->data->ppos_y + y >= mlx->data->rows - 1.125)
 		mlx->data->ppos_y = 1.125;
-	else if (mlx->data->ppos_x + x >= mlx->data->cols)
+	else if (mlx->data->ppos_x + x >= mlx->data->cols- 1.125)
 		mlx->data->ppos_x = 1.125;
 	else if (mlx->data->ppos_y + y < 1)
 		mlx->data->ppos_y = mlx->data->rows - 1.125;
