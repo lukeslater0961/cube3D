@@ -6,7 +6,7 @@
 /*   By: lslater <lslater@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:03:15 by lslater           #+#    #+#             */
-/*   Updated: 2024/09/30 15:40:26 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/01 09:43:13 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ void	gen_minimap(t_mlx *mlx, t_data *data)
 		j = 0;
 		while (count_j < (data->cols * WIDTH))
 		{	
-			if (data->map[count_i / HEIGHT][count_j / WIDTH] == '1' && i != data->ppos_y && j != data->ppos_x)
+			if (data->map[count_i / HEIGHT][count_j / WIDTH] == '1')
 				mlx_pixel_put(mlx->mlx, mlx->winmap, count_j, count_i, 0xFFFF0000);
-			else if ((data->map[count_i / HEIGHT][count_j / WIDTH] == '0' || data->map[count_i / HEIGHT][count_j / WIDTH] == 'S') && i != data->ppos_y && j != data->ppos_x)
+			else if (data->map[count_i / HEIGHT][count_j / WIDTH] == '0' || data->map[count_i / HEIGHT][count_j / WIDTH] == 'S')
 				mlx_pixel_put(mlx->mlx, mlx->winmap, count_j, count_i, 0xFFDDCC00);
-			else if (data->map[count_i / HEIGHT][count_j / WIDTH] == ' ' && i != data->ppos_y && j != data->ppos_x)
+			else if (data->map[count_i / HEIGHT][count_j / WIDTH] == ' ')
 				mlx_pixel_put(mlx->mlx, mlx->winmap, count_j, count_i, 0xFF0000FF);
 			else if (i > 0 && j > 0 && !data->map[count_i / HEIGHT][count_j / WIDTH - 1])
 			{
