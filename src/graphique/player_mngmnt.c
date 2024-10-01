@@ -6,52 +6,32 @@
 /*   By: lslater <lslater@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:27:13 by lslater           #+#    #+#             */
-/*   Updated: 2024/10/01 12:27:54 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/01 12:34:45 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube.h"
 
-/*void	rotate_player(t_mlx *mlx, t_data *data, int	r_angle)
+void	normalize_angle(float *angle)
 {
-	float	old_ppos_x;
+	while (*angle < 0)
+		*angle += 2 * M_PI;
+	while (*angle >= 2 * M_PI)
+		*angle -= 2 * M_PI;
+}//normalizes the angle to be in the range 0 to PI
 
-	old_ppos_x = data->ppos_x;
-	printf("%f p_angle", data->p_angle);
-	if (r_angle == 1)
-	{
-		data->ppos_x = (data->ppos_x * cos(data->p_angle) - (data->ppos_x * sin(data->p_angle)));
-		data->ppos_y = (old_ppos_x * cos(data->p_angle) - (old_ppos_x * sin(data->p_angle)));
-	}
-	else 
-	{
-		data->ppos_x = (data->ppos_x * cos(data->p_angle) + (data->ppos_x * sin(data->p_angle)));
-		data->ppos_y = (old_ppos_x * cos(data->p_angle) + (old_ppos_x * sin(data->p_angle)));
-	}
-	gen_minimap(mlx, mlx->data);
-}*/
-
-void normalize_angle(float *angle)
+void	rotate_player(t_mlx *mlx, t_data *data, int r_angle)
 {
-    // Normalize the angle to be in the range [0, 2π]
-    while (*angle < 0)
-        *angle += 2 * M_PI;
-    while (*angle >= 2 * M_PI)
-        *angle -= 2 * M_PI;
-}
+	float	angle_step;
 
-void rotate_player(t_mlx *mlx, t_data *data, int r_angle)
-{
-    float angle_step;
- 
 	clear_minimap(mlx);
 	if (r_angle == 1)
 		angle_step = -0.05;
 	else
 		angle_step = 0.05;
-    data->p_angle += angle_step;
-    normalize_angle(&data->p_angle);
-    printf("Rotating Player: p_angle = %f\n", data->p_angle);//to be removed
+	data->p_angle += angle_step;
+	normalize_angle(&data->p_angle);
+	printf("Rotating Player: p_angle = %f\n", data->p_angle);//to be removed
 	gen_minimap(mlx, mlx->data);
 }
 
@@ -59,7 +39,7 @@ void	do_pacman(t_mlx *mlx, float y, float x)
 {
 	if (mlx->data->ppos_y + y >= mlx->data->rows - 1.125)
 		mlx->data->ppos_y = 1.125;
-	else if (mlx->data->ppos_x + x >= mlx->data->cols- 1.125)
+	else if (mlx->data->ppos_x + x >= mlx->data->cols - 1.125)
 		mlx->data->ppos_x = 1.125;
 	else if (mlx->data->ppos_y + y < 1)
 		mlx->data->ppos_y = mlx->data->rows - 1.125;
@@ -83,5 +63,5 @@ void	move_player(t_mlx *mlx, float speed)
 		mlx->data->ppos_x += speed * cos(mlx->data->p_angle);
 		gen_minimap(mlx, mlx->data);
 	}
-    printf("Rotating Player: p_angle = %f\n", mlx->data->p_angle);// to be removed
+	printf("Rotating Player: p_angle = %f\n", mlx->data->p_angle);// to be removed
 }
