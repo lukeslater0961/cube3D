@@ -23,6 +23,7 @@ SRCS_FILES = main.c						\
 			 graphique/window_mngmnt.c	\
 			 graphique/minimap_mngmnt.c	\
 			 graphique/player_mngmnt.c	\
+			 graphique/render.c
 
 SRCS = 	$(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 OBJS = $(subst $(SRCS_DIR)/,$(OBJS_DIR)/, $(subst .c,.o, $(SRCS)))
@@ -49,7 +50,7 @@ MSG_TOTALY_CLEANED = "$(COLOUR_RED)$(bold)[🗑️ ]$(PROJECT) $(notbold)$(COLOU
 MSG_COMPILING = "$(COLOUR_YELLOW)$(bold)[💧 Compiling 💧]$(notbold)$(COLOUR_YELLOW) $(^)$(NO_COLOR)";
 MSG_READY = "$(PROJET_EMOJY) $(COLOUR_BLUE)$(bold)$(PROJECT) $(COLOUR_GREEN)$(bold)ready$(NO_COLOR)\n";
 
-BANNER = $(PRINT) "$(COLOUR_PURPULE)   ___  __  __  ____  ____  ___  ____            \n"
+BANNER = $(PRINT) "$(COLOUR_PURPULE)  ___  __  __  ____  ____  ___  ____            \n"
 BANNER1 = printf "$(COLOUR_PURPULE) / __)(  )(  )(  _ \( ___)(__ )(  _ \ \n"
 BANNER2 = printf "$(COLOUR_PURPULE)( (__  )(__)(  ) _ < )__)  (_ \ )(_) )\n"
 BANNER3 = printf "$(COLOUR_PURPULE) \___)(______)(____/(____)(___/(____/ \n\n"
