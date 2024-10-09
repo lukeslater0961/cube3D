@@ -6,7 +6,7 @@
 /*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 18:36:44 by basverdi          #+#    #+#             */
-/*   Updated: 2024/10/09 18:15:10 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/10/09 19:28:25 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ int	render(t_mlx *mlx)
 	floor = getcolor(mlx->data->colors[0]);
 	ceiling = getcolor(mlx->data->colors[1]);
 	ft_printf("%i, %i\n", ceiling, floor);//to be removed
-	while(y < 500)
+	while(y < WINHEIGHT)
 	{
 		x = 0;
-		while (x < 500)
+		while (x < WINWIDTH)
 		{
-			if (y <= 500 / 2)
+			if (y <= WINHEIGHT / 2)
 				mlx_pixel_put(mlx->mlx, mlx->win, x, y, ceiling);
 			else
 				mlx_pixel_put(mlx->mlx, mlx->win, x, y, floor);

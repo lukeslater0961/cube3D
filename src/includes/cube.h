@@ -6,7 +6,7 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:23:12 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/10/09 18:16:19 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:43:43 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@
 # include "utils.h"
 # include "library.h"
 # include "graphics.h"
-# include <stdint.h>
 
 # define PI 3.1415926535
 
 # define WIDTH 16
 # define HEIGHT	16
+# define WINWIDTH 1920
+# define WINHEIGHT 1080
 
 # define ARG "Too many or not enough arguments"
 # define MALLOC "malloc failed"

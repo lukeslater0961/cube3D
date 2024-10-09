@@ -6,7 +6,7 @@
 /*   By: lslater <lslater@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:04:55 by lslater           #+#    #+#             */
-/*   Updated: 2024/10/09 17:35:41 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:42:43 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	init_window(t_mlx *mlx, t_data *data)
 	mlx->winmap = mlx_new_window(mlx->mlx, data->cols * WIDTH,
 			data->rows * HEIGHT, "miniMap");
 	gen_minimap(mlx, data);
-	mlx->win = mlx_new_window(mlx->mlx, 500, 500, "love, death and robots");
+	mlx->win = mlx_new_window(mlx->mlx, WINWIDTH, WINHEIGHT, "love, death and robots");
 	render(mlx);
 	return (0);
 }
