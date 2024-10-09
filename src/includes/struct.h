@@ -6,12 +6,14 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:22:52 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/09/30 10:36:49 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/09 18:17:22 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+
+# include "library.h"
 
 typedef struct s_data
 {
@@ -38,5 +40,16 @@ typedef struct s_mlx
 	void	*winmap;
 	t_data	*data;
 }				t_mlx;
+
+union u_color {
+	int value;
+	struct {
+		uint8_t b;
+		uint8_t g;
+		uint8_t r;
+		uint8_t a;
+	};
+};
+
 
 #endif 
