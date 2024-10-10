@@ -6,7 +6,7 @@
 /*   By: lslater <lslater@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:03:15 by lslater           #+#    #+#             */
-/*   Updated: 2024/10/09 19:30:59 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/10/10 18:08:36 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,6 @@ void	gen_minimap(t_mlx *mlx, t_data *data)
 		count_i++;
 		i += 0.125;
 	}
-	draw_direction_line(mlx, data);
+	raycasting(mlx);
+	//draw_direction_line(mlx, data);
 }

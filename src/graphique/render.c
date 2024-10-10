@@ -6,14 +6,12 @@
 /*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 18:36:44 by basverdi          #+#    #+#             */
-/*   Updated: 2024/10/09 19:28:25 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/10/10 18:14:35 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube.h"
 #include <stdint.h>
-
-
 
 int	getcolor(char *colorStr)
 {
@@ -28,6 +26,22 @@ int	getcolor(char *colorStr)
 	free(str_tmp);
 	return (color.value);
 }
+
+void	raycasting(t_mlx *mlx)
+{
+	float	raydirx;
+	float	raydiry;
+	float	endpointx;
+	float	endpointy;
+
+	raydiry = sin(mlx->data->p_angle);
+	raydirx = cos(mlx->data->p_angle);
+	endpointx = (mlx->data->ppos_x / 16) + 1 * raydirx;
+	endpointy = (mlx->data->ppos_y / 16) + 1 * raydiry;
+	
+	drawray(mlx, endpointx, endpointy);
+}
+
 int	render(t_mlx *mlx)
 {
 	int	x;
@@ -38,7 +52,6 @@ int	render(t_mlx *mlx)
 	y = 0;
 	floor = getcolor(mlx->data->colors[0]);
 	ceiling = getcolor(mlx->data->colors[1]);
-	ft_printf("%i, %i\n", ceiling, floor);//to be removed
 	while(y < WINHEIGHT)
 	{
 		x = 0;
