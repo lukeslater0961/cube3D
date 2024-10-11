@@ -6,7 +6,7 @@
 /*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 18:36:44 by basverdi          #+#    #+#             */
-/*   Updated: 2024/10/11 18:19:33 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/10/11 18:21:47 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	getcolor(char *colorStr)
 	return (color.value);
 }
 
-void	raycasting(t_mlx *mlx)
+int	raycasting(t_mlx *mlx)
 {
 	t_ray	*ray;
 	int		lenght_dir;
@@ -36,6 +36,8 @@ void	raycasting(t_mlx *mlx)
 	float	rangle;
 
 	ray = ft_calloc(sizeof(t_ray), 1);
+	if (!ray)
+		return (1);
 	mlx->data->ray = ray;
 	mlx->data->ray->raydiry = sin(mlx->data->p_angle);
 	mlx->data->ray->raydirx = cos(mlx->data->p_angle);
@@ -48,6 +50,7 @@ void	raycasting(t_mlx *mlx)
 		lenght_dir = drawray(mlx, rangle);
 		rangle += 0.05;
 	}
+	return (0);
 }
 
 int	render(t_mlx *mlx)

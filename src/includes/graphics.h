@@ -6,7 +6,7 @@
 /*   By: lslater <lslater@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:07:13 by lslater           #+#    #+#             */
-/*   Updated: 2024/10/11 18:11:33 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/10/11 18:28:12 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	gen_minimap(t_mlx *mlx, t_data *data);
 int		clear_minimap(t_mlx *mlx);
 
 //void	move_player(t_mlx *mlx, float y, float x);
-void move_player(t_mlx *mlx, float speed);
+void	move_player(t_mlx *mlx, float speed);
 void	rotate_player(t_mlx *mlx, t_data *data, int	r_angle);
 int		render(t_mlx *mlx);
 int		drawray(t_mlx *mlx, float rangle);
-void	raycasting(t_mlx *mlx);
+int		raycasting(t_mlx *mlx);
 
 int		init_window(t_mlx *mlx, t_data *data);
 int		windowmap_hook(int event, void *param);

@@ -6,7 +6,7 @@
 /*   By: lslater <lslater@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:03:15 by lslater           #+#    #+#             */
-/*   Updated: 2024/10/10 18:08:36 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/10/11 18:27:13 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	gen_minimap(t_mlx *mlx, t_data *data)
 	float	j = 0;
 	int		count_i = 0;
 	int		count_j = 0;
+	int		onsenfou;
 
 	printf("x: %f\n", data->ppos_x);
 	while (count_i < (data->rows * HEIGHT))
@@ -88,6 +89,5 @@ void	gen_minimap(t_mlx *mlx, t_data *data)
 		count_i++;
 		i += 0.125;
 	}
-	raycasting(mlx);
-	//draw_direction_line(mlx, data);
+	onsenfou = raycasting(mlx);
 }
