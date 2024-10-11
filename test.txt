@@ -1,6 +1,0 @@
-
-int		fd;
-	char	**map;
-	char	**flood_fill;
-	char	*textures[6];
-	char	player_orientation;
