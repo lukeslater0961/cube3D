@@ -6,7 +6,7 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:22:52 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/10/09 18:17:22 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/10/11 18:16:47 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define STRUCT_H
 
 # include "library.h"
+
+typedef struct	s_ray
+{
+	int	raydirx;
+	int	raydiry;
+}				t_ray;
 
 typedef struct s_data
 {
@@ -30,7 +36,8 @@ typedef struct s_data
 	float	ppos_x;
 	float	x_pixels;
 	float	y_pixels;
-	float	p_angle;		
+	float	p_angle;
+	t_ray	*ray;
 }			t_data;
 
 typedef struct s_mlx

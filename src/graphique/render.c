@@ -6,7 +6,7 @@
 /*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 18:36:44 by basverdi          #+#    #+#             */
-/*   Updated: 2024/10/10 18:14:35 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/10/11 18:19:33 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,25 @@ int	getcolor(char *colorStr)
 
 void	raycasting(t_mlx *mlx)
 {
-	float	raydirx;
-	float	raydiry;
+	t_ray	*ray;
+	int		lenght_dir;
 	float	endpointx;
 	float	endpointy;
+	float	rangle;
 
-	raydiry = sin(mlx->data->p_angle);
-	raydirx = cos(mlx->data->p_angle);
-	endpointx = (mlx->data->ppos_x / 16) + 1 * raydirx;
-	endpointy = (mlx->data->ppos_y / 16) + 1 * raydiry;
-	
-	drawray(mlx, endpointx, endpointy);
+	ray = ft_calloc(sizeof(t_ray), 1);
+	mlx->data->ray = ray;
+	mlx->data->ray->raydiry = sin(mlx->data->p_angle);
+	mlx->data->ray->raydirx = cos(mlx->data->p_angle);
+	endpointx = (mlx->data->ppos_x / 16) + 1 * mlx->data->ray->raydirx;
+	endpointy = (mlx->data->ppos_y / 16) + 1 * mlx->data->ray->raydiry;
+	rangle = mlx->data->p_angle - PI/6;
+
+	while (rangle < mlx->data->p_angle + PI/6)
+	{
+		lenght_dir = drawray(mlx, rangle);
+		rangle += 0.05;
+	}
 }
 
 int	render(t_mlx *mlx)
