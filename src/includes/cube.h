@@ -6,7 +6,7 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:23:12 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/10/10 16:54:24 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/10/12 14:04:56 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 
 # define WIDTH 16
 # define HEIGHT	16
-# define WINWIDTH 500
-# define WINHEIGHT 500
+# define WINWIDTH 1000
+# define WINHEIGHT 1000
 
 # define ARG "Too many or not enough arguments"
 # define MALLOC "malloc failed"

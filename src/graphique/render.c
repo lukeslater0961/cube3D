@@ -6,7 +6,7 @@
 /*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 18:36:44 by basverdi          #+#    #+#             */
-/*   Updated: 2024/10/11 18:21:47 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/10/12 14:28:45 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,50 @@ int	getcolor(char *colorStr)
 	return (color.value);
 }
 
+int	render_wall(t_mlx *mlx, int column, int length_dir)
+{
+	int	line_H;
+	int	current_Height = 0;
+	int	y;
+
+	if (length_dir <= 0)
+		line_H = WINHEIGHT / 3;
+	else
+		line_H = (WINHEIGHT) / length_dir;
+	if (line_H > WINHEIGHT / 3)
+		line_H = WINHEIGHT / 3;
+	y = (WINHEIGHT / 2) - (line_H / 2);
+	while (current_Height < line_H)
+	{
+		mlx_pixel_put(mlx->mlx, mlx->win, column, y + current_Height, 0xFFFFFFFF);
+		current_Height++;
+	}
+	printf("line height = %i\n", line_H);
+	return (0);
+}
+
 int	raycasting(t_mlx *mlx)
 {
-	t_ray	*ray;
-	int		lenght_dir;
-	float	endpointx;
-	float	endpointy;
+	//t_ray	*ray;
+	int		length_dir;
 	float	rangle;
+	int		column;
 
-	ray = ft_calloc(sizeof(t_ray), 1);
+	column = 0;
+	/*ray = ft_calloc(sizeof(t_ray), 1);
 	if (!ray)
 		return (1);
 	mlx->data->ray = ray;
 	mlx->data->ray->raydiry = sin(mlx->data->p_angle);
-	mlx->data->ray->raydirx = cos(mlx->data->p_angle);
-	endpointx = (mlx->data->ppos_x / 16) + 1 * mlx->data->ray->raydirx;
-	endpointy = (mlx->data->ppos_y / 16) + 1 * mlx->data->ray->raydiry;
+	mlx->data->ray->raydirx = cos(mlx->data->p_angle);*/
 	rangle = mlx->data->p_angle - PI/6;
-
+	render(mlx);
 	while (rangle < mlx->data->p_angle + PI/6)
 	{
-		lenght_dir = drawray(mlx, rangle);
-		rangle += 0.05;
+		length_dir = drawray(mlx, rangle);
+		render_wall(mlx, column, length_dir);
+		rangle += 0.0005;
+		column++;
 	}
 	return (0);
 }

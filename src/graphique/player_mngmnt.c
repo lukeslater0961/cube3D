@@ -6,7 +6,7 @@
 /*   By: lslater <lslater@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:27:13 by lslater           #+#    #+#             */
-/*   Updated: 2024/10/10 18:05:04 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/10/12 13:14:25 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ void	normalize_angle(float *angle)
 void	rotate_player(t_mlx *mlx, t_data *data, int r_angle)
 {
 	float	angle_step;
-
-	clear_minimap(mlx);
+	
+	(void)mlx;
+	mlx_clear_window(mlx->mlx, mlx->win);
+//	clear_minimap(mlx);
 	if (r_angle == 1)
 		angle_step = -0.05;
 	else
@@ -32,7 +34,8 @@ void	rotate_player(t_mlx *mlx, t_data *data, int r_angle)
 	data->p_angle += angle_step;
 	normalize_angle(&data->p_angle);
 	printf("Rotating Player: p_angle = %f\n", data->p_angle);//to be removed
-	gen_minimap(mlx, mlx->data);
+	raycasting(mlx);
+//	gen_minimap(mlx, mlx->data);
 }
 
 void	do_pacman(t_mlx *mlx, float y, float x)
@@ -45,12 +48,14 @@ void	do_pacman(t_mlx *mlx, float y, float x)
 		mlx->data->ppos_y = mlx->data->rows - 1.125;
 	else if (mlx->data->ppos_x + x < 1)
 		mlx->data->ppos_x = mlx->data->cols - 1.125;
-	gen_minimap(mlx, mlx->data);
+	raycasting(mlx);
+//	gen_minimap(mlx, mlx->data);
 }
 
 void	move_player(t_mlx *mlx, float speed)
 {
-	clear_minimap(mlx);
+	mlx_clear_window(mlx->mlx, mlx->win);
+//	clear_minimap(mlx);
 	if ((mlx->data->ppos_y + speed > mlx->data->rows)
 		|| (mlx->data->ppos_y + speed < 0))
 		do_pacman(mlx, speed, speed);
@@ -61,7 +66,8 @@ void	move_player(t_mlx *mlx, float speed)
 	{
 		mlx->data->ppos_y += speed * sin(mlx->data->p_angle);
 		mlx->data->ppos_x += speed * cos(mlx->data->p_angle);
-		gen_minimap(mlx, mlx->data);
+		raycasting(mlx);
+//		gen_minimap(mlx, mlx->data);
 	}
 	printf("Rotating Player: p_angle = %f\n", mlx->data->p_angle);// to be removed
 }
