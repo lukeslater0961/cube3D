@@ -6,7 +6,7 @@
 /*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:35:12 by basverdi          #+#    #+#             */
-/*   Updated: 2024/10/12 13:32:14 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/13 03:10:53 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	isWall(float dx, float dy, t_mlx *mlx)
 	return (0);
 }
 
-int	drawray(t_mlx *mlx, float rangle)
+float	drawray(t_mlx *mlx, float rangle)
 {
 	float	dx;
 	float	dy;
@@ -44,10 +44,10 @@ int	drawray(t_mlx *mlx, float rangle)
 		if (isWall(dx, dy, mlx))
 			break ;
         //mlx_pixel_put(mlx->mlx, mlx->winmap, dx * 16, dy * 16, 0xFFFFFFFF);
-		dx += 0.09 * cos(rangle);
-		dy += 0.09 * sin(rangle);
+		dx += 0.009 * cos(rangle);
+		dy += 0.009 * sin(rangle);
 		steps++;
 	}
-	current_angle = steps * cos(mlx->data->p_angle - rangle);
+	current_angle = sqrt((dx - mlx->data->ppos_x) * (dx - mlx->data->ppos_x) + (dy - mlx->data->ppos_y) * (dy - mlx->data->ppos_y));//fix fisheye
 	return (current_angle);
 }

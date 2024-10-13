@@ -6,7 +6,7 @@
 /*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 18:36:44 by basverdi          #+#    #+#             */
-/*   Updated: 2024/10/12 14:28:45 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/13 03:09:57 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,41 @@ int	getcolor(char *colorStr)
 	return (color.value);
 }
 
-int	render_wall(t_mlx *mlx, int column, int length_dir)
+/*int	render_wall(t_mlx *mlx, int column, float length_dir, float rangle)
 {
 	int	line_H;
 	int	current_Height = 0;
 	int	y;
 
 	if (length_dir <= 0)
-		line_H = WINHEIGHT / 3;
+		line_H = (WINHEIGHT / 5) * 3;
 	else
 		line_H = (WINHEIGHT) / length_dir;
-	if (line_H > WINHEIGHT / 3)
-		line_H = WINHEIGHT / 3;
+	if (line_H > (WINHEIGHT / 5) * 3)
+		line_H = (WINHEIGHT / 5) * 3;
+	y = (WINHEIGHT / 2) - (line_H / 2);
+	while (current_Height < line_H)
+	{
+		mlx_pixel_put(mlx->mlx, mlx->win, column, y + current_Height, 0xFFFFFFFF);
+		current_Height++;
+	}
+	printf("line height = %i\n", line_H);
+	return (0);
+}*/
+
+int	render_wall(t_mlx *mlx, int column, float length_dir, float ray_angle)
+{
+	int	line_H;
+	int	current_Height = 0;
+	int	y;
+
+	length_dir *= cos(mlx->data->p_angle - ray_angle);
+	if (length_dir <= 0)
+		line_H = WINHEIGHT;
+	else
+		line_H = WINHEIGHT / length_dir;
+	if (line_H > WINHEIGHT)
+		line_H = WINHEIGHT;
 	y = (WINHEIGHT / 2) - (line_H / 2);
 	while (current_Height < line_H)
 	{
@@ -52,7 +75,7 @@ int	render_wall(t_mlx *mlx, int column, int length_dir)
 int	raycasting(t_mlx *mlx)
 {
 	//t_ray	*ray;
-	int		length_dir;
+	float		length_dir;
 	float	rangle;
 	int		column;
 
@@ -63,13 +86,13 @@ int	raycasting(t_mlx *mlx)
 	mlx->data->ray = ray;
 	mlx->data->ray->raydiry = sin(mlx->data->p_angle);
 	mlx->data->ray->raydirx = cos(mlx->data->p_angle);*/
-	rangle = mlx->data->p_angle - PI/6;
+	rangle = mlx->data->p_angle - PI / 6;
 	render(mlx);
 	while (rangle < mlx->data->p_angle + PI/6)
 	{
 		length_dir = drawray(mlx, rangle);
-		render_wall(mlx, column, length_dir);
-		rangle += 0.0005;
+		render_wall(mlx, column, length_dir, rangle);
+		rangle += (PI / 3) / WINWIDTH;
 		column++;
 	}
 	return (0);
