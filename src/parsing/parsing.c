@@ -6,7 +6,7 @@
 /*   By: bastienverdier-vaissiere <bastienverdier-  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:40:58 by bastienverdie     #+#    #+#             */
-/*   Updated: 2024/10/12 14:29:53 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/13 03:20:42 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,14 @@ int	check_map_is_closed(t_data *data)
 
 static	void	get_p_angle(t_data *data)
 {
-	if (data->player_orientation == 'N' || data->player_orientation == 'E')
-		data->p_angle = 0.66;
-	else if (data->player_orientation == 'S' || data->player_orientation == 'W')
-		data->p_angle = -0.66;
+	if (data->player_orientation == 'N')
+		data->p_angle = PI / 2;
+	else if (data->player_orientation == 'S')
+		data->p_angle = (3 * PI) / 2;
+	else if (data->player_orientation == 'E')
+		data->p_angle = 0;
+	else if (data->player_orientation == 'W')
+		data->p_angle = PI;
 }
 
 int	check_map(t_data *data)
