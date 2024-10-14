@@ -6,7 +6,7 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:22:52 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/10/11 18:16:47 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/10/14 11:42:33 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct	s_ray
 {
 	int	raydirx;
 	int	raydiry;
+	int	orientation;
 }				t_ray;
 
 typedef struct s_data
