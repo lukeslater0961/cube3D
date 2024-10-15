@@ -6,7 +6,7 @@
 /*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 18:36:44 by basverdi          #+#    #+#             */
-/*   Updated: 2024/10/14 13:17:06 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/15 11:09:32 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	render_wall(t_mlx *mlx, int column, float length_dir, float ray_angle)
 	int	currenth;
 	int	y;
 
+	y = 0;
 	currenth = 0;
 	length_dir *= cos(mlx->data->p_angle - ray_angle);
 	if (length_dir <= 0)
@@ -47,7 +48,7 @@ int	render_wall(t_mlx *mlx, int column, float length_dir, float ray_angle)
 		if (mlx->data->ray->orientation == 1)
 			mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, 0xFFFF0000);
 		if (mlx->data->ray->orientation == 2)
-			mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, 0xFFFFB800);
+			mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, 0xFFFFB800);	
 		else
 			mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, 0xFFFF00B8);
 		currenth++;

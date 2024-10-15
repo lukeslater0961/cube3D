@@ -6,7 +6,7 @@
 /*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:35:12 by basverdi          #+#    #+#             */
-/*   Updated: 2024/10/14 13:10:49 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/15 10:57:33 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	isWall(float dx, float dy, t_mlx *mlx)
 				mlx->data->ray->orientation = 2;  // Horizontal wall (Y-axis)
 			else
 				mlx->data->ray->orientation = 0;
-			printf("orientation %i\n", mlx->data->ray->orientation);
 			return 1;
 		}
 	}
@@ -54,7 +53,10 @@ float drawray(t_mlx *mlx, float ray_angle)
         if (isWall(ray_x, ray_y, mlx))
 		{
             hit_wall = 1;
-            length_dir = sqrt((ray_x - mlx->data->ppos_x) * (ray_x - mlx->data->ppos_x) + (ray_y -  mlx->data->ppos_y) * (ray_y - mlx->data->ppos_y)); // updates ray length by using the pythogorean theorem to get a precise vlaue of the distance
+            length_dir = sqrt((ray_x - mlx->data->ppos_x) * \
+							  (ray_x - mlx->data->ppos_x) + \
+							  (ray_y -  mlx->data->ppos_y) * \
+							  (ray_y - mlx->data->ppos_y));
         }
 		ray_x += cos(ray_angle) * 0.009;
 		ray_y += sin(ray_angle) * 0.009;

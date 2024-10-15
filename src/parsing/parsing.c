@@ -6,7 +6,7 @@
 /*   By: bastienverdier-vaissiere <bastienverdier-  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:40:58 by bastienverdie     #+#    #+#             */
-/*   Updated: 2024/10/13 03:20:42 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/15 10:45:53 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int	check_map(t_data *data)
 	if (check_map_is_closed(data))
 		return (1);
 	get_p_angle(data);
-	ft_printf("Every things is good !\n");
 	return (0);
 }
 

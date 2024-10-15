@@ -6,7 +6,7 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:55:43 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/09/26 15:11:37 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/10/15 10:45:03 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ static int	parse_textures(t_data *data)
 	if (!line)
 		return (1);
 	data->textures = ft_calloc(sizeof(char *), 7);
+	if (!data->textures)
+		return (1);
 	while (line && i <= 5)
 	{
 		if (!line)

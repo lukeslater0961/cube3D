@@ -6,21 +6,18 @@
 /*   By: lslater <lslater@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:04:55 by lslater           #+#    #+#             */
-/*   Updated: 2024/10/12 12:31:31 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/15 10:42:10 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube.h"
 
-int	init_window(t_mlx *mlx, t_data *data)
+int	init_window(t_mlx *mlx)
 {
-//	mlx->winmap = mlx_new_window(mlx->mlx, data->cols * WIDTH,
-//			data->rows * HEIGHT, "miniMap");
-//	gen_minimap(mlx, data);
-	(void)data;
-	mlx->win = mlx_new_window(mlx->mlx, WINWIDTH, WINHEIGHT, "love, death and robots");
-	raycasting(mlx);
-//	render(mlx);
+	mlx->win = mlx_new_window(mlx->mlx, WINWIDTH, WINHEIGHT, \
+			"love, death and robots");
+	if (raycasting(mlx))
+		return (1);
 	return (0);
 }
 
