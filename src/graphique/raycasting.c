@@ -6,7 +6,7 @@
 /*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:35:12 by basverdi          #+#    #+#             */
-/*   Updated: 2024/10/16 18:51:37 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/10/16 19:02:25 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	init_dda(t_mlx *mlx, float ray_angle)
 	else
     {
         mlx->ray->step_x = 1;
-        mlx->ray->side_dist_x = (mlx->data->ppos_x + 1.0 - mlx->ray->x) * mlx->ray->delta_dist_x;
+        mlx->ray->side_dist_x = (mlx->ray->x + 1.0 - mlx->data->ppos_x) * mlx->ray->delta_dist_x;
     }
 	if (mlx->ray->ray_dir_y < 0)
     {
@@ -38,7 +38,7 @@ void	init_dda(t_mlx *mlx, float ray_angle)
 	else
     {
         mlx->ray->step_y = 1;
-        mlx->ray->side_dist_y = (mlx->data->ppos_y + 1.0 - mlx->ray->y) * mlx->ray->delta_dist_y;
+        mlx->ray->side_dist_y = (mlx->ray->y + 1.0 - mlx->data->ppos_y) * mlx->ray->delta_dist_y;
     }
 }
 
@@ -83,6 +83,7 @@ float	drawray(t_mlx *mlx, float rangle)
         perp_wall_dist = (mlx->ray->side_dist_x - mlx->ray->delta_dist_x);
 	else
         perp_wall_dist = (mlx->ray->side_dist_y - mlx->ray->delta_dist_y);
+	//perp_wall_dist *= cos(mlx->data->p_angle - rangle);
 	if (mlx->ray->side == 0)
     {
         if (mlx->ray->ray_dir_x > 0)
