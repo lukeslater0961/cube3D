@@ -1,7 +1,7 @@
-NO  ./path_to_the_north_texture
-SO  ./path_to_the_south_texture
-WE  ./path_to_the_west_texture
-EA  ./path_to_the_east_texture
+NO  ./north.png
+SO  ./south.png
+WE  ./west.png
+EA  ./east.png
 
 F  109,67,20
 C  31,204,228

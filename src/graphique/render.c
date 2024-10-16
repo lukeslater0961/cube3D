@@ -6,7 +6,7 @@
 /*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 18:36:44 by basverdi          #+#    #+#             */
-/*   Updated: 2024/10/15 11:09:32 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/16 18:41:22 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,14 @@ int	render_wall(t_mlx *mlx, int column, float length_dir, float ray_angle)
 	y = (WINHEIGHT / 2) - (lineh / 2);
 	while (currenth < lineh)
 	{
-		if (mlx->data->ray->orientation == 1)
-			mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, 0xFFFF0000);
-		if (mlx->data->ray->orientation == 2)
-			mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, 0xFFFFB800);	
-		else
-			mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, 0xFFFF00B8);
+		if (mlx->ray->orientation == 1)  // Est
+			mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, 0xFFFF0000); // Rouge
+		else if (mlx->ray->orientation == 2)  // Ouest
+		    mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, 0xFF00FF00); // Vert
+		else if (mlx->ray->orientation == 3)  // Sud
+			mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, 0xFF0000FF); // Bleu
+		else if (mlx->ray->orientation == 4)  // Nord
+			mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, 0xFFFFFF00); // Jaune
 		currenth++;
 	}
 	return (0);
@@ -67,7 +69,7 @@ int	raycasting(t_mlx *mlx)
 	ray = ft_calloc(sizeof(t_ray), 1);
 	if (!ray)
 		return (1);
-	mlx->data->ray = ray;
+	mlx->ray = ray;
 	rangle = mlx->data->p_angle - PI / 6;
 	render(mlx);
 	while (rangle < mlx->data->p_angle + PI / 6)

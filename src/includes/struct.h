@@ -6,7 +6,7 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:22:52 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/10/14 11:42:33 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/16 18:38:16 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,20 @@
 
 typedef struct	s_ray
 {
-	int	raydirx;
-	int	raydiry;
-	int	orientation;
+	int		raydirx;
+	int		raydiry;
+	float	delta_dist_x;
+	float	delta_dist_y;
+	float	side_dist_x;
+	float	side_dist_y;
+	float	ray_dir_x;
+	float	ray_dir_y;
+	int		step_x;
+	int		step_y;
+	int		x;
+	int		y;
+	int		side;
+	int		orientation;
 }				t_ray;
 
 typedef struct s_data
@@ -38,7 +49,6 @@ typedef struct s_data
 	float	x_pixels;
 	float	y_pixels;
 	float	p_angle;
-	t_ray	*ray;
 }			t_data;
 
 typedef struct s_mlx
@@ -47,6 +57,7 @@ typedef struct s_mlx
 	void	*win;
 	void	*winmap;
 	t_data	*data;
+	t_ray	*ray;
 }				t_mlx;
 
 union u_color {

@@ -6,7 +6,7 @@
 /*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 11:38:02 by basverdi          #+#    #+#             */
-/*   Updated: 2024/10/15 10:41:33 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/16 18:51:50 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int	keyboard_hook(int event, void *param)
 		move_player(mlx, -0.125);
 	if (event == 7)
 		rotate_player(mlx, mlx->data, 0);
-	else
-		ft_printf("%d", event);
 	return (0);
 }
 

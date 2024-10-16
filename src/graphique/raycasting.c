@@ -6,60 +6,96 @@
 /*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:35:12 by basverdi          #+#    #+#             */
-/*   Updated: 2024/10/15 10:57:33 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/16 18:51:37 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube.h"
 
-int	isWall(float dx, float dy, t_mlx *mlx)
+void	init_dda(t_mlx *mlx, float ray_angle)
 {
-	int	x;
-	int	y;
-	float delta_y;
-	float delta_x;
-
-	y = (int)dy;
-	x = (int)dx;
-	if (y >= 0 && y < mlx->data->rows && x >= 0 && x < mlx->data->cols)
-	{
-		if (mlx->data->map[y][x] == '1')
-		{
-			delta_x = fabsf(dx - (int)dx);
-			delta_y = fabsf(dy - (int)dy);
-
-			if (delta_x < delta_y) 
-				mlx->data->ray->orientation = 1;  // Vertical wall (X-axis)
-			else if (delta_y < delta_x)
-				mlx->data->ray->orientation = 2;  // Horizontal wall (Y-axis)
-			else
-				mlx->data->ray->orientation = 0;
-			return 1;
-		}
-	}
+	mlx->ray->ray_dir_x = cos(ray_angle);
+	mlx->ray->ray_dir_y = sin(ray_angle);
+	mlx->ray->x = (int)(mlx->data->ppos_x);
+    mlx->ray->y = (int)(mlx->data->ppos_y);
+	mlx->ray->delta_dist_x = fabs(1 / mlx->ray->ray_dir_x);
+    mlx->ray->delta_dist_y = fabs(1 / mlx->ray->ray_dir_y);
+	if (mlx->ray->ray_dir_x < 0)
+    {
+        mlx->ray->step_x = -1;
+        mlx->ray->side_dist_x = (mlx->data->ppos_x - mlx->ray->x) * mlx->ray->delta_dist_x;
+    }
 	else
-		return (1);
-	return (0);
+    {
+        mlx->ray->step_x = 1;
+        mlx->ray->side_dist_x = (mlx->data->ppos_x + 1.0 - mlx->ray->x) * mlx->ray->delta_dist_x;
+    }
+	if (mlx->ray->ray_dir_y < 0)
+    {
+        mlx->ray->step_y = -1;
+        mlx->ray->side_dist_y = (mlx->data->ppos_y - mlx->ray->y) * mlx->ray->delta_dist_y;
+    }
+	else
+    {
+        mlx->ray->step_y = 1;
+        mlx->ray->side_dist_y = (mlx->data->ppos_y + 1.0 - mlx->ray->y) * mlx->ray->delta_dist_y;
+    }
 }
 
-float drawray(t_mlx *mlx, float ray_angle)
+void	is_wall(t_mlx *mlx)
 {
-    float length_dir = 0.0;
-    float ray_x = mlx->data->ppos_x; 
-    float ray_y = mlx->data->ppos_y;
-    int hit_wall = 0;
-    
-    while (!hit_wall) {
-        if (isWall(ray_x, ray_y, mlx))
+	int	hit;
+
+	hit = 0;
+	while (!hit)
+	{
+		if (mlx->ray->side_dist_x < mlx->ray->side_dist_y)
+	    {
+			mlx->ray->side_dist_x += mlx->ray->delta_dist_x;
+			mlx->ray->x += mlx->ray->step_x;
+	      mlx->ray->side = 0; // Hit a vertical wall
+	    }
+		else
+	    {
+	        mlx->ray->side_dist_y += mlx->ray->delta_dist_y;
+	        mlx->ray->y += mlx->ray->step_y;
+			mlx->ray->side = 1; // Hit a horizontal wall
+	    }
+        // Check if ray has hit a wall
+		if (mlx->ray->y >= 0 && mlx->ray->y < mlx->data->rows - 1 && mlx->ray->x >= 0 && mlx->ray->x < mlx->data->cols - 1)
 		{
-            hit_wall = 1;
-            length_dir = sqrt((ray_x - mlx->data->ppos_x) * \
-							  (ray_x - mlx->data->ppos_x) + \
-							  (ray_y -  mlx->data->ppos_y) * \
-							  (ray_y - mlx->data->ppos_y));
-        }
-		ray_x += cos(ray_angle) * 0.009;
-		ray_y += sin(ray_angle) * 0.009;
+	        if (mlx->data->map[mlx->ray->y][mlx->ray->x] == '1')
+				hit = 1;
+		}
+		else
+			hit = 1;
+	}
+}
+
+float	drawray(t_mlx *mlx, float rangle)
+{
+	float	perp_wall_dist;
+
+
+	init_dda(mlx, rangle);
+	is_wall(mlx);
+	if (mlx->ray->side == 0)
+        perp_wall_dist = (mlx->ray->side_dist_x - mlx->ray->delta_dist_x);
+	else
+        perp_wall_dist = (mlx->ray->side_dist_y - mlx->ray->delta_dist_y);
+	if (mlx->ray->side == 0)
+    {
+        if (mlx->ray->ray_dir_x > 0)
+            mlx->ray->orientation = 1; // West wall
+        else
+            mlx->ray->orientation = 2; // East wall
     }
-    return (length_dir);
+	else
+    {
+        if (mlx->ray->ray_dir_y > 0)
+            mlx->ray->orientation = 3; // North wall
+        else
+            mlx->ray->orientation = 4; // South wall
+    }
+	return (perp_wall_dist);
 }
