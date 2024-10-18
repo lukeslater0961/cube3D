@@ -6,7 +6,7 @@
 /*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:35:12 by basverdi          #+#    #+#             */
-/*   Updated: 2024/10/16 19:02:25 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/10/18 13:22:59 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	is_wall(t_mlx *mlx)
 	        mlx->ray->y += mlx->ray->step_y;
 			mlx->ray->side = 1; // Hit a horizontal wall
 	    }
-        // Check if ray has hit a wall
 		if (mlx->ray->y >= 0 && mlx->ray->y < mlx->data->rows - 1 && mlx->ray->x >= 0 && mlx->ray->x < mlx->data->cols - 1)
 		{
 	        if (mlx->data->map[mlx->ray->y][mlx->ray->x] == '1')
@@ -76,14 +75,12 @@ float	drawray(t_mlx *mlx, float rangle)
 {
 	float	perp_wall_dist;
 
-
 	init_dda(mlx, rangle);
 	is_wall(mlx);
 	if (mlx->ray->side == 0)
         perp_wall_dist = (mlx->ray->side_dist_x - mlx->ray->delta_dist_x);
 	else
         perp_wall_dist = (mlx->ray->side_dist_y - mlx->ray->delta_dist_y);
-	//perp_wall_dist *= cos(mlx->data->p_angle - rangle);
 	if (mlx->ray->side == 0)
     {
         if (mlx->ray->ray_dir_x > 0)

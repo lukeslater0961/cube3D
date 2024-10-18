@@ -6,10 +6,9 @@
 /*   By: lslater <lslater@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:27:13 by lslater           #+#    #+#             */
-/*   Updated: 2024/10/15 10:39:26 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/18 13:19:40 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../includes/cube.h"
 
 void	normalize_angle(float *angle)
@@ -23,7 +22,7 @@ void	normalize_angle(float *angle)
 void	rotate_player(t_mlx *mlx, t_data *data, int r_angle)
 {
 	float	angle_step;
-	
+
 	mlx_clear_window(mlx->mlx, mlx->win);
 	if (r_angle == 1)
 		angle_step = -0.05;

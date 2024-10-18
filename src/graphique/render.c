@@ -6,10 +6,9 @@
 /*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 18:36:44 by basverdi          #+#    #+#             */
-/*   Updated: 2024/10/16 18:41:22 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/10/18 13:28:55 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../includes/cube.h"
 #include <stdint.h>
 
@@ -25,6 +24,18 @@ int	getcolor(char *colorStr)
 	color.b = ft_atoi(str_tmp[2]);
 	free(str_tmp);
 	return (color.value);
+}
+
+void	set_wall_color(t_mlx *mlx, int currenth, int y, int column)
+{
+	if (mlx->ray->orientation == 1)
+		mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, 0xFFFF0000);
+	else if (mlx->ray->orientation == 2)
+		mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, 0xFF00FF00);
+	else if (mlx->ray->orientation == 3)
+		mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, 0xFF0000FF);
+	else if (mlx->ray->orientation == 4)
+		mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, 0xFFFFFF00);
 }
 
 int	render_wall(t_mlx *mlx, int column, float length_dir, float ray_angle)
@@ -45,14 +56,7 @@ int	render_wall(t_mlx *mlx, int column, float length_dir, float ray_angle)
 	y = (WINHEIGHT / 2) - (lineh / 2);
 	while (currenth < lineh)
 	{
-		if (mlx->ray->orientation == 1)  // Est
-			mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, 0xFFFF0000); // Rouge
-		else if (mlx->ray->orientation == 2)  // Ouest
-		    mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, 0xFF00FF00); // Vert
-		else if (mlx->ray->orientation == 3)  // Sud
-			mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, 0xFF0000FF); // Bleu
-		else if (mlx->ray->orientation == 4)  // Nord
-			mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, 0xFFFFFF00); // Jaune
+		set_wall_color(mlx, currenth, y, column);
 		currenth++;
 	}
 	return (0);
