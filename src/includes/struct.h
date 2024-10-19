@@ -6,7 +6,7 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:22:52 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/10/16 18:38:16 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/10/19 15:26:13 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "library.h"
 
-typedef struct	s_ray
+typedef struct s_ray
 {
 	int		raydirx;
 	int		raydiry;
@@ -60,15 +60,16 @@ typedef struct s_mlx
 	t_ray	*ray;
 }				t_mlx;
 
-union u_color {
-	int value;
-	struct {
-		uint8_t b;
-		uint8_t g;
-		uint8_t r;
-		uint8_t a;
+union u_color
+{
+	int	value;
+	struct
+	{
+		uint8_t	b;
+		uint8_t	g;
+		uint8_t	r;
+		uint8_t	a;
 	};
 };
-
 
 #endif 

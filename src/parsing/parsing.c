@@ -6,18 +6,14 @@
 /*   By: bastienverdier-vaissiere <bastienverdier-  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:40:58 by bastienverdie     #+#    #+#             */
-/*   Updated: 2024/10/16 19:05:13 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/10/19 14:56:45 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube.h"
 
-int	check_map_is_closed(t_data *data)
+int	set_values(t_data *data)
 {
-	int	i;
-	int	j;
-
-	i = 0;
 	data->rows = 0;
 	data->cols = 0;
 	while (data->map[data->rows])
@@ -31,6 +27,17 @@ int	check_map_is_closed(t_data *data)
 	data->flood_fill = ft_duptab(data->map, data->flood_fill,
 			data->rows, data->cols);
 	if (check_chars_map(data, data->rows, data->cols))
+		return (1);
+	return (0);
+}
+
+int	check_map_is_closed(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	if (set_values(data))
 		return (1);
 	while (i < data->rows)
 	{
@@ -50,8 +57,7 @@ int	check_map_is_closed(t_data *data)
 		}
 		i++;
 	}
-	print_error(NO_PLAYER);
-	return (1);
+	return (print_error(NO_PLAYER));
 }
 
 static	void	get_p_angle(t_data *data)

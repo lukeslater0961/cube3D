@@ -21,7 +21,6 @@ SRCS_FILES = main.c						\
 			 utils/print/print_errors.c \
 			 graphique/graphique.c		\
 			 graphique/window_mngmnt.c	\
-			 graphique/minimap_mngmnt.c	\
 			 graphique/player_mngmnt.c	\
 			 graphique/render.c			\
 			 graphique/raycasting.c
