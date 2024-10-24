@@ -6,7 +6,7 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:55:43 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/10/19 15:02:22 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/24 15:02:35 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,15 @@ static int	check_textures(t_data *data)
 	int			i;
 
 	i = 0;
-	data->fd_textures = ft_calloc(sizeof(int), 4);
-	if (!data->fd_textures)
-		return (print_error(MALLOC));
 	while (i < 4)
 	{
-		texture = ft_split(data->textures[i], ' ');
+		texture = ft_split(data->textures[i], '	');
 		if (!texture[0] || (i < 4 && ft_strncmp(texture[0], \
 			texture_prefixes[i], 2)))
 			return (free_tab_print_err(MISSING_COORD, texture));
 		if (!ft_strncmp(texture[1], "\0", ft_strlen(texture[1])))
 			return (free_tab_print_err(MISSING_TPATH, texture));
-		else if (i < 4 && check_directory(texture[1], data, i))
+		else if (i < 4  && check_extension(texture[1], ".png"))
 			return (free_tab_print_err("", texture));
 		i++;
 		ft_magic_free("%2", texture);

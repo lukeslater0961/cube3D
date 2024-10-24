@@ -6,7 +6,7 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 15:39:26 by bananabread       #+#    #+#             */
-/*   Updated: 2024/09/26 13:03:17 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/24 14:35:27 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int		check_file(char *filename, t_data *data);
 int		check_directory(char *filename, t_data *data, int type);
 int		do_parsing(char **argv, t_data *data);
 int		check_file_content(t_data *data);
+int		check_extension(char *filename, char *extension_name);
 
 char	**ft_duptab(char **src, char **dest, int len, int cols);
 int		add_line_to_map(t_data *data, char *line, int *i, int *capacity);

@@ -6,20 +6,21 @@
 /*   By: bastienverdier-vaissiere <bastienverdier-  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:48:17 by bastienverdie     #+#    #+#             */
-/*   Updated: 2024/09/18 09:38:42 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/24 14:38:40 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube.h"
 
-int	check_extension(char *filename)
+int	check_extension(char *filename, char *extension_name)
 {
 	char	*extension;
 
+	printf("%s\n", filename);
 	extension = ft_strrchr(filename, '.');
 	if (extension)
 		extension[ft_strlen(extension) + 1] = '\0';
-	if (!extension || strcmp(extension, ".cub") != 0)
+	if (!extension || strcmp(extension, extension_name) != 0)
 		return (print_error(FILE_INVE));
 	return (0);
 }
@@ -35,14 +36,12 @@ int	check_directory(char *filename, t_data *data, int type)
 		return (print_error(FILE_DE));
 	else if (type == -42)
 		data->fd = fd;
-	else
-		data->fd_textures[type] = fd;
 	return (0);
 }
 
 int	check_file(char *filename, t_data *data)
 {
-	if (check_extension(filename))
+	if (check_extension(filename, ".cub"))
 		return (1);
 	if (check_directory(filename, data, -42))
 		return (1);
