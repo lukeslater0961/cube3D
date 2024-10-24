@@ -6,7 +6,7 @@
 /*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 18:36:44 by basverdi          #+#    #+#             */
-/*   Updated: 2024/10/18 13:28:55 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/24 16:57:27 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/cube.h"
@@ -28,14 +28,24 @@ int	getcolor(char *colorStr)
 
 void	set_wall_color(t_mlx *mlx, int currenth, int y, int column)
 {
+	int	north;
+	int	south;
+	int	east;
+	int	west;
+
+	north = mlx_get_image_pixel(mlx->mlx, "north.png", column, y + currenth);
+	printf("HE::::LLLOOOOO\n");
+	south = mlx_get_image_pixel(mlx->mlx, "south.png", column, y + currenth);
+	east = mlx_get_image_pixel(mlx->mlx, "east.png", column, y + currenth);
+	west = mlx_get_image_pixel(mlx->mlx, "west.png", column, y + currenth);
 	if (mlx->ray->orientation == 1)
-		mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, 0xFFFF0000);
+		mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, north);
 	else if (mlx->ray->orientation == 2)
-		mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, 0xFF00FF00);
+		mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, south);
 	else if (mlx->ray->orientation == 3)
-		mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, 0xFF0000FF);
+		mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, east);
 	else if (mlx->ray->orientation == 4)
-		mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, 0xFFFFFF00);
+		mlx_pixel_put(mlx->mlx, mlx->win, column, y + currenth, west);
 }
 
 int	render_wall(t_mlx *mlx, int column, float length_dir, float ray_angle)

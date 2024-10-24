@@ -6,7 +6,7 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:22:52 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/10/19 15:26:13 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/24 16:36:36 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,31 +33,41 @@ typedef struct s_ray
 	int		orientation;
 }				t_ray;
 
+typedef struct s_texture
+{
+	void	*north;
+	void	*south;
+	void	*east;
+	void	*west;
+	int		size;
+}		t_texture;
+
 typedef struct s_data
 {
-	int		fd;
-	int		*fd_textures;
-	char	**colors;
-	char	**map;
-	int		rows;
-	int		cols;
-	char	**flood_fill;
-	char	**textures;
-	char	player_orientation;
-	float	ppos_y;
-	float	ppos_x;
-	float	x_pixels;
-	float	y_pixels;
-	float	p_angle;
+	int			fd;
+	int			*fd_textures;
+	char		**colors;
+	char		**map;
+	int			rows;
+	int			cols;
+	char		**flood_fill;
+	char		**textures;
+	char		player_orientation;
+	float		ppos_y;
+	float		ppos_x;
+	float		x_pixels;
+	float		y_pixels;
+	float		p_angle;
 }			t_data;
 
 typedef struct s_mlx
 {
-	void	*mlx;
-	void	*win;
-	void	*winmap;
-	t_data	*data;
-	t_ray	*ray;
+	void		*mlx;
+	void		*win;
+	void		*winmap;
+	t_data		*data;
+	t_ray		*ray;
+	t_texture	*texture;
 }				t_mlx;
 
 union u_color

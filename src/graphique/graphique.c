@@ -6,7 +6,7 @@
 /*   By: basverdi <basverdi@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 11:38:02 by basverdi          #+#    #+#             */
-/*   Updated: 2024/10/16 18:54:48 by basverdi         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:46:15 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ int	init_graphique(t_data *data)
 		return (1);
 	mlx->mlx = mlx_init();
 	mlx->data = data;
+	mlx->texture = ft_calloc(sizeof(t_texture), 1);
+	if (!mlx->texture)
+		return (1);
+	set_textures(mlx);
 	if (init_window(mlx))
 		return (1);
 	mlx_on_event(mlx->mlx, mlx->win, MLX_WINDOW_EVENT, window_hook, mlx);

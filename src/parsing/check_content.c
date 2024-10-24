@@ -6,7 +6,7 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:55:43 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/10/24 15:50:04 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/24 16:43:52 by basverdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ static int	parse_textures(t_data *data)
 	free(line);
 	if (check_textures(data) || check_colours(data))
 		return (free_tab_print_err("", data->textures));
-	ft_magic_free("%2", data->textures);
 	return (0);
 }
 
