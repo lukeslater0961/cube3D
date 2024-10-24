@@ -6,7 +6,7 @@
 /*   By: bananabread <bananabread@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:55:43 by bastienverd       #+#    #+#             */
-/*   Updated: 2024/10/24 15:02:35 by lslater          ###   ########.fr       */
+/*   Updated: 2024/10/24 15:50:04 by lslater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static int	check_textures(t_data *data)
 	while (i < 4)
 	{
 		texture = ft_split(data->textures[i], '	');
+		free(data->textures[i]);
 		if (!texture[0] || (i < 4 && ft_strncmp(texture[0], \
 			texture_prefixes[i], 2)))
 			return (free_tab_print_err(MISSING_COORD, texture));
@@ -52,6 +53,7 @@ static int	check_textures(t_data *data)
 			return (free_tab_print_err(MISSING_TPATH, texture));
 		else if (i < 4  && check_extension(texture[1], ".png"))
 			return (free_tab_print_err("", texture));
+		data->textures[i] = ft_strdup(texture[1]);
 		i++;
 		ft_magic_free("%2", texture);
 	}
